@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dikr Ramadan Series — Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep:   #0f2318;
+    --green-dark:   #1a3828;
+    --green-mid:    #2d6247;
+    --green-accent: #4a8c64;
+    --green-light:  #c8e6d0;
+    --green-wash:   #edf7f1;
+    --gold:         #c9a84c;
+    --gold-light:   #f0dfa0;
+    --cream:        #faf8f3;
+    --ink:          #1a1a1a;
+    --ink-soft:     #3d3d3d;
+    --ink-muted:    #6b6b6b;
+    --rule:         #d4e8dc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--green-deep);
+    padding: 64px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(74,140,100,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .header-inner { position: relative; max-width: 900px; margin: 0 auto; }
+  .header-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--green-light);
+    margin-bottom: 32px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    padding: 4px 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Main Layout ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+
+  /* ── Episode Card ── */
+  .episode {
+    margin-top: 64px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .episode:nth-child(1) { animation-delay: 0.1s; }
+  .episode:nth-child(2) { animation-delay: 0.25s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ep-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 32px;
+    background: var(--green-dark);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ep-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .ep-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 2px;
+  }
+  .ep-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .ep-body {
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background: #fff;
+  }
+
+  /* ── Info Strip ── */
+  .info-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--rule);
+  }
+  .info-item {
+    padding: 18px 24px;
+    border-right: 1px solid var(--rule);
+  }
+  .info-item:last-child { border-right: none; }
+  .info-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-accent);
+    margin-bottom: 4px;
+  }
+  .info-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  /* ── Section ── */
+  .section { padding: 28px 32px; border-bottom: 1px solid var(--rule); }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── Dua Block (single phrase) ── */
+  .dua-block {
+    background: var(--green-wash);
+    border: 1px solid var(--green-light);
+    border-left: 3px solid var(--green-accent);
+    border-radius: 4px;
+    padding: 28px 32px 20px;
+    text-align: center;
+  }
+  .dua-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 48px;
+    line-height: 1.8;
+    color: var(--green-dark);
+    direction: rtl;
+    margin-bottom: 16px;
+    display: block;
+    word-break: keep-all;
+  }
+  .dua-transliteration {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--green-mid);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .dua-meaning {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-style: normal;
+  }
+  .dua-meaning::before { content: '\201C'; }
+  .dua-meaning::after  { content: '\201D'; }
+
+  /* ── Multi-phrase Dua Table ── */
+  .dua-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .dua-table th {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .dua-table th.arabic-col { text-align: center; }
+  .dua-table td {
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    vertical-align: middle;
+  }
+  .dua-table tr:nth-child(even) td { background: var(--green-wash); }
+  .dua-table .td-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 32px;
+    line-height: 2;
+    color: var(--green-dark);
+    direction: rtl;
+    text-align: center;
+  }
+  .dua-table .td-translit {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  /* ── Points Table ── */
+  .points-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .points-table th {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .points-table td {
+    padding: 13px 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .points-table tr:nth-child(even) td { background: var(--green-wash); }
+  .points-table .td-label {
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+    width: 200px;
+  }
+
+  /* ── Body Text ── */
+  .body-text {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+  .body-text:last-child { margin-bottom: 0; }
+
+  /* ── Takeaway ── */
+  .takeaway {
+    background: var(--green-deep);
+    color: rgba(255,255,255,0.85);
+    border-radius: 0 0 4px 4px;
+    padding: 24px 32px;
+    font-size: 14px;
+    line-height: 1.75;
+    border-bottom: none !important;
+    position: relative;
+  }
+  .takeaway::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 32px; right: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .takeaway .section-label {
+    color: var(--gold);
+    border-bottom-color: rgba(201,168,76,0.25);
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    text-align: center;
+    padding: 48px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 640px) {
+    /* Layout */
+    .site-header { padding: 32px 16px 28px; }
+    .header-title { font-size: 32px; }
+    .header-subtitle { font-size: 16px; }
+    .header-meta { gap: 8px; }
+    .main { padding: 0 16px 60px; }
+
+    /* Episode cards */
+    .episode { margin-top: 32px; }
+    .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
+    .ep-title { font-size: 20px; }
+
+    /* Info strip — stack vertically */
+    .info-strip { grid-template-columns: 1fr; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
+
+    /* Sections */
+    .section { padding: 16px; }
+
+    /* Arabic */
+    .dua-arabic { font-size: 30px; }
+    .dua-block { padding: 20px 16px 16px; }
+
+    /* Tables — let them scroll */
+    .points-table, .dua-table { min-width: 480px; }
+    .points-table .td-label, .dua-table .td-arabic { white-space: normal; }
+
+    /* Footer */
+    .site-footer { padding: 28px 16px; }
+
+    /* PDF button — smaller, anchored to bottom edge */
+    .pdf-btn {
+      bottom: 16px; right: 16px;
+      padding: 11px 16px; font-size: 12px; gap: 7px;
+    }
+  }
+
+  /* ── PDF Button ── */
+  .pdf-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--green-dark);
+    color: #fff;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(15,35,24,0.35);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    text-decoration: none;
+  }
+  .pdf-btn:hover {
+    background: var(--green-mid);
+    box-shadow: 0 6px 32px rgba(15,35,24,0.45);
+    transform: translateY(-1px);
+  }
+  .pdf-btn:active { transform: translateY(0); }
+  .pdf-btn svg { flex-shrink: 0; }
+  .pdf-btn-gold { color: var(--gold); font-weight: 500; }
+
+  /* ── Print / PDF styles ── */
+  @media print {
+    @page { size: A4; margin: 12mm 14mm 12mm 14mm; }
+
+    /* Force colour rendering */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Kill ALL animations globally — this is the main fix for white space */
+    *, *::before, *::after {
+      animation: none !important;
+      -webkit-animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    body { background: #fff; font-size: 11pt; }
+
+    .pdf-btn { display: none !important; }
+
+    .site-header {
+      padding: 28px 28px 22px !important;
+      background: #0f2318 !important;
+      -webkit-print-color-adjust: exact !important;
+    }
+
+    .header-title { font-size: 36pt !important; }
+    .header-subtitle { font-size: 14pt !important; }
+
+    .main { padding: 0 0 20px; max-width: 100%; }
+
+    .episode { margin-top: 20px; }
+
+    /* Keep each episode together if possible */
+    .ep-banner { background: #1a3828 !important; page-break-after: avoid; break-after: avoid; }
+    .ep-body { page-break-before: avoid; break-before: avoid; }
+
+    /* Sections should not break mid-way */
+    .section { break-inside: avoid; page-break-inside: avoid; }
+
+    /* Colours */
+    .takeaway {
+      background: #0f2318 !important;
+      color: rgba(255,255,255,0.92) !important;
+    }
+    .takeaway .section-label { color: #c9a84c !important; }
+
+    .dua-block { background: #edf7f1 !important; }
+
+    .dua-table tr:nth-child(even) td,
+    .points-table tr:nth-child(even) td { background: #edf7f1 !important; }
+
+    .points-table th, .dua-table th {
+      background: #1a3828 !important;
+      color: #fff !important;
+    }
+
+    .info-strip { border-bottom: 1px solid #d4e8dc; }
+
+    .site-footer { margin-top: 16px; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-label">AlMaghrib Institute · YouTube</p>
+    <h1 class="header-title">Dikr Ramadan Series</h1>
+    <p class="header-subtitle">Episode Tracker</p>
+    <div class="header-meta">
+      <span class="meta-pill">Sh. Ammar AlShukry</span>
+      <span class="meta-pill">Dhikr &amp; Du'a</span>
+      <span class="meta-pill">Ramadan Series</span>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- ═══════════════════════════ EPISODE 1 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 01</span>
+      <h2 class="ep-title">This Destroys EVERY Problem</h2>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Dhikr</p>
+          <p class="info-value">La Hawla wa La Quwwata illa Billah</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Source</p>
+          <p class="info-value">Bukhari &amp; Muslim · Imam Ahmad · Al-Bayhaqi</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Surrender, transformation &amp; reliance on Allah alone</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Dhikr</p>
+        <div class="dua-block">
+          <span class="dua-arabic">لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ</span>
+          <p class="dua-transliteration">Lā ḥawla wa lā quwwata illā billāh</p>
+          <p class="dua-meaning">There is no transformation or power except through Allah</p>
+        </div>
+        <p class="body-text" style="margin-top:14px; font-size:13px; color:var(--ink-muted);">
+          <em>Note:</em> Ḥawl derives from taḥwīl — transformation, the shift from one ḥāl (state) to another. The phrase means: no change of state, and no strength to do anything, is possible except through Allah.
+        </p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">The Prophet ﷺ called it "a treasure from the treasures of Paradise" and specifically taught it to 19 companions. It is also listed by the Prophet ﷺ as one of the <em>al-Baqiyāt al-Ṣāliḥāt</em> — the "remaining righteous deeds" mentioned in Sūrah al-Kahf (18:46), alongside SubḥānAllah, Alḥamdulillah, Lā ilāha illAllāh, and Allāhu Akbar.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">When &amp; Why to Use It</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead>
+            <tr><th style="width:200px;">Point</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Tawḥīd of Help</td>
+              <td>Just as <em>Lā ilāha illAllāh</em> declares Allah the only object of worship, this phrase declares Him the only source of help — mirroring <em>Iyyāka nastaʿīn</em> in al-Fātiḥah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Allah's Response</td>
+              <td>When a person says it, Allah declares: "My slave has submitted and surrendered." (Al-Bayhaqi — the Prophet ﷺ said: <em>aslama ʿabdī wa-staslam</em>)</td>
+            </tr>
+            <tr>
+              <td class="td-label">Response to Adhān</td>
+              <td>When you hear <em>ḥayya ʿala al-ṣalāh / al-falāḥ</em>, respond with this phrase — admitting you cannot move from heedlessness to prayer without Allah's help.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Leaving the House</td>
+              <td><em>Bismillāh, tawakkaltu ʿala Allāh, wa lā ḥawla wa lā quwwata illā billāh</em> — the Prophet ﷺ said: you will be guided, sufficed, protected, and Shayṭān will turn away.</td>
+            </tr>
+            <tr>
+              <td class="td-label">For Hardship</td>
+              <td>Ibn Taymiyyah: "Let his constant refuge be this phrase — through it, terrors are met, burdens are carried, and lofty stations are reached."</td>
+            </tr>
+            <tr>
+              <td class="td-label">For the Evil Eye</td>
+              <td>Qur'an 18:39 — say <em>Māshā'Allāh, lā quwwata illā billāh</em> when entering a blessing, to protect it and yourself.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>Every transformation — from sickness to health, weakness to strength, sin to obedience — comes only from Allah. Say it when overwhelmed, exhausted, tempted, or struck by news. It is an act of surrender that invites divine assistance.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ EPISODE 2 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 02</span>
+      <h2 class="ep-title">The Power of the Du'ā of Yūnus</h2>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Dhikr</p>
+          <p class="info-value">Du'ā of Yūnus (Dhu al-Nūn) — 3 phrases</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Source</p>
+          <p class="info-value">Qur'an 21:87–88 · Al-Tirmidhī</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Distress, Tawḥīd, glorification &amp; confession as path to relief</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Dhikr</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="dua-table">
+          <thead>
+            <tr>
+              <th class="arabic-col" style="width:40%;">Arabic</th>
+              <th style="width:30%;">Transliteration</th>
+              <th style="width:30%;">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-arabic">لَا إِلَٰهَ إِلَّا أَنْتَ</td>
+              <td class="td-translit">Lā ilāha illā anta</td>
+              <td>There is nothing worthy of worship except You</td>
+            </tr>
+            <tr>
+              <td class="td-arabic">سُبْحَانَكَ</td>
+              <td class="td-translit">Subḥānaka</td>
+              <td>Exalted are You — free from all imperfection</td>
+            </tr>
+            <tr>
+              <td class="td-arabic">إِنِّي كُنْتُ مِنَ الظَّالِمِينَ</td>
+              <td class="td-translit">Innī kuntu mina al-ẓālimīn</td>
+              <td>Indeed, I have been of the wrongdoers</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">Yūnus (AS) was sent to Nineveh — a city of 100,000+, possibly the largest on earth at the time. After years of rejection he left without Allah's permission. Allah then softened the people's hearts and they repented en masse: the only city in history whose faith after seeing a sign of punishment was accepted (10:98).</p>
+        <p class="body-text">Meanwhile Yūnus was on a storm-struck ship. Lots were drawn three times — each time falling on him. Thrown overboard, he was swallowed by a whale. Waking in complete darkness, he realised he was alive, prostrated to Allah, and made this du'ā.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Four Elements of the Du'ā</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead>
+            <tr><th style="width:200px;">Element</th><th>Explanation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">1 — Tawḥīd</td>
+              <td>Declaring that only Allah has power and only He deserves to be called upon.</td>
+            </tr>
+            <tr>
+              <td class="td-label">2 — Tasbīḥ</td>
+              <td>Glorifying Allah above every imperfection — even in darkest distress affirming: "What happened to me is not injustice from You. You are perfect."</td>
+            </tr>
+            <tr>
+              <td class="td-label">3 — Servitude</td>
+              <td>Acknowledging complete dependence and need for Allah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">4 — Confession</td>
+              <td>Admitting wrongdoing without explicitly asking forgiveness — the request is eloquently implied in the description of one's own state.</td>
+            </tr>
+            <tr>
+              <td class="td-label">The Promise</td>
+              <td>The Prophet ﷺ: "No Muslim supplicates with it for anything ever except that Allah responds." (Al-Tirmidhī)</td>
+            </tr>
+            <tr>
+              <td class="td-label">Universal Application</td>
+              <td>Every believer has a "whale" — fear, anxiety, addiction, negligence. Allah's rescue of Yūnus is His template for saving all believers in every time and place (21:88).</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>Say these three phrases when you feel trapped, hopeless, or stuck. You are declaring Tawḥīd, glorifying Allah, acknowledging your need, and confessing your shortcomings — the most direct path to relief from any hardship.</p>
+      </div>
+
+    </div>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  AlMaghrib Institute · Dikr Ramadan Series · Sh. Ammar AlShukry
+</footer>
+
+
+<button class="pdf-btn" onclick="exportPDF()" title="Save as PDF">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="12" y1="18" x2="12" y2="12"/>
+    <polyline points="9 15 12 18 15 15"/>
+  </svg>
+  <span class="pdf-btn-gold">Export</span>&nbsp;PDF
+</button>
+
+<script>
+  function exportPDF() {
+    document.querySelectorAll('.episode, .episode *').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.animation = 'none';
+      el.style.animationDelay = '0s';
+      el.style.transition = 'none';
+    });
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        document.querySelectorAll('.episode, .episode *').forEach(el => {
+          el.style.opacity = '';
+          el.style.transform = '';
+          el.style.animation = '';
+          el.style.animationDelay = '';
+          el.style.transition = '';
+        });
+      }, 500);
+    }, 150);
+  }
+</script>
+
+</body>
+</html>

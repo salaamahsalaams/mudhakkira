@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allah's Names Series — Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:         #1a1a2e;
+    --dark:         #16213e;
+    --mid:          #0f3460;
+    --accent:       #5a7fc1;
+    --light:        #c8d8f0;
+    --wash:         #eef2fb;
+    --gold:         #c9a84c;
+    --cream:        #faf9f6;
+    --ink:          #1a1a1a;
+    --ink-soft:     #3d3d3d;
+    --ink-muted:    #6b6b6b;
+    --rule:         #dde4f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--deep);
+    padding: 64px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(90,127,193,0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.07) 0%, transparent 60%);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .header-inner { position: relative; max-width: 900px; margin: 0 auto; }
+  .header-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 62px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--light);
+    margin-bottom: 32px;
+  }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .meta-pill {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    padding: 4px 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Main ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+
+  /* ── Episode Card ── */
+  /* Episodes always visible - animation layered on top for screen only */
+  .episode { margin-top: 64px; }
+
+  .ep-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 32px;
+    background: var(--dark);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ep-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .ep-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 2px;
+  }
+  .ep-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .ep-body {
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background: #fff;
+  }
+
+  /* ── Info Strip ── */
+  .info-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--rule);
+  }
+  .info-item { padding: 18px 24px; border-right: 1px solid var(--rule); }
+  .info-item:last-child { border-right: none; }
+  .info-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .info-value { font-size: 13px; color: var(--ink-soft); }
+
+  /* ── Section ── */
+  .section { padding: 28px 32px; border-bottom: 1px solid var(--rule); }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── Name Block (equivalent of dua-block) ── */
+  .name-block {
+    background: var(--wash);
+    border: 1px solid var(--light);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 24px 32px 18px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .name-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 52px;
+    line-height: 1.8;
+    color: var(--dark);
+    direction: rtl;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .name-transliteration {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .name-meaning {
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .name-meaning::before { content: '\201C'; }
+  .name-meaning::after  { content: '\201D'; }
+
+  /* ── Names Row (for multiple names) ── */
+  .names-row {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .names-row.two-col { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Points Table ── */
+  .points-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .points-table th {
+    background: var(--dark);
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .points-table td {
+    padding: 13px 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  .points-table tr:nth-child(even) td { background: var(--wash); }
+  .points-table .td-label {
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+    width: 200px;
+  }
+
+  /* ── Comparison table ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .compare-table th {
+    background: var(--dark);
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .compare-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--wash); }
+  .compare-table .td-name {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 26px;
+    direction: rtl;
+    color: var(--dark);
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    width: 130px;
+  }
+  .compare-table .td-translit {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+    white-space: nowrap;
+    width: 160px;
+  }
+
+  /* ── Body Text ── */
+  .body-text {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+  .body-text:last-child { margin-bottom: 0; }
+
+  /* ── Takeaway ── */
+  .takeaway {
+    background: var(--deep);
+    color: rgba(255,255,255,0.85);
+    border-radius: 0 0 4px 4px;
+    padding: 24px 32px;
+    font-size: 14px;
+    line-height: 1.75;
+    border-bottom: none !important;
+    position: relative;
+  }
+  .takeaway::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 32px; right: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .takeaway .section-label { color: var(--gold); border-bottom-color: rgba(201,168,76,0.25); }
+
+  /* ── Du'a block inside takeaway ── */
+  .dua-quote {
+    margin-top: 14px;
+    border-left: 2px solid rgba(201,168,76,0.5);
+    padding-left: 16px;
+  }
+  .dua-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 6px;
+    line-height: 1.7;
+  }
+  .dua-quote .dua-ar {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 22px;
+    font-style: normal;
+    direction: rtl;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    text-align: center;
+    padding: 48px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PDF Button ── */
+  .pdf-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--dark);
+    color: #fff;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(22,33,62,0.35);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .pdf-btn:hover { background: var(--mid); transform: translateY(-1px); }
+  .pdf-btn:active { transform: translateY(0); }
+  .pdf-btn-gold { color: var(--gold); font-weight: 500; }
+
+  /* ── Print ── */
+  @media print {
+    @page { size: A4; margin: 12mm 14mm 12mm 14mm; }
+
+    /* Force colour rendering */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Kill ALL animations globally — main fix for white space */
+    *, *::before, *::after {
+      animation: none !important;
+      -webkit-animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    body { background: #fff; font-size: 11pt; }
+
+    .pdf-btn { display: none !important; }
+
+    .site-header {
+      padding: 28px 28px 22px !important;
+      background: #1a1a2e !important;
+      -webkit-print-color-adjust: exact !important;
+    }
+
+    .header-title { font-size: 36pt !important; }
+    .header-subtitle { font-size: 14pt !important; }
+
+    .main { padding: 0 0 20px; max-width: 100%; }
+
+    .episode { margin-top: 20px; }
+
+    .ep-banner { background: #16213e !important; page-break-after: avoid; break-after: avoid; }
+    .ep-body { page-break-before: avoid; break-before: avoid; }
+
+    .section { break-inside: avoid; page-break-inside: avoid; }
+
+    .takeaway {
+      background: #1a1a2e !important;
+      color: rgba(255,255,255,0.92) !important;
+    }
+    .takeaway .section-label { color: #c9a84c !important; }
+
+    .name-block { background: #eef2fb !important; }
+
+    .compare-table tr:nth-child(even) td,
+    .points-table tr:nth-child(even) td { background: #eef2fb !important; }
+
+    .points-table th, .compare-table th {
+      background: #16213e !important;
+      color: #fff !important;
+    }
+
+    .info-strip { border-bottom: 1px solid #dde4f0; }
+
+    .site-footer { margin-top: 16px; padding: 20px; }
+  }
+
+  @media (max-width: 640px) {
+    /* Layout */
+    .site-header { padding: 32px 16px 28px; }
+    .header-title { font-size: 32px; }
+    .header-subtitle { font-size: 16px; }
+    .header-meta { gap: 8px; }
+    .main { padding: 0 16px 60px; }
+
+    /* Episode cards */
+    .episode { margin-top: 32px; }
+    .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
+    .ep-title { font-size: 20px; }
+
+    /* Info strip */
+    .info-strip { grid-template-columns: 1fr; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
+
+    /* Sections */
+    .section { padding: 16px; }
+
+    /* Names row — stack on mobile */
+    .names-row { grid-template-columns: 1fr; gap: 10px; }
+    .names-row.two-col { grid-template-columns: 1fr; }
+    .name-arabic { font-size: 36px; }
+    .name-block { padding: 18px 16px 14px; }
+
+    /* Tables scroll */
+    .points-table, .compare-table { min-width: 500px; }
+    .compare-table .td-name { font-size: 22px; }
+
+    /* Dua quotes in takeaway */
+    .dua-quote .dua-ar { font-size: 18px; }
+
+    /* Footer */
+    .site-footer { padding: 28px 16px; }
+
+    /* PDF button */
+    .pdf-btn {
+      bottom: 16px; right: 16px;
+      padding: 11px 16px; font-size: 12px; gap: 7px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-label">AlMaghrib Institute · YouTube · Ramadan 2026</p>
+    <h1 class="header-title">Allah's Names Series</h1>
+    <p class="header-subtitle">Episode Tracker</p>
+    <div class="header-meta">
+      <span class="meta-pill">Dr. Omar Suleiman</span>
+      <span class="meta-pill">Asmā' ul-Ḥusnā</span>
+      <span class="meta-pill">Ramadan Series</span>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- ═══════════════════════════ EPISODE 1 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 01</span>
+      <h2 class="ep-title">How Merciful is the Most Merciful?</h2>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Names Covered</p>
+          <p class="info-value">Ar-Raḥmān · Ar-Raḥīm · Ar-Ra'ūf</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Source</p>
+          <p class="info-value">Qur'an · Ḥadīth Qudsī · Ibn al-Qayyim</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Mercy as the governing principle of all creation</p>
+        </div>
+      </div>
+
+      <!-- Names -->
+      <div class="section">
+        <p class="section-label">The Names</p>
+        <div class="names-row">
+          <div class="name-block">
+            <span class="name-arabic">ٱلرَّحْمَٰنُ</span>
+            <p class="name-transliteration">Ar-Raḥmān</p>
+            <p class="name-meaning">The Entirely Merciful</p>
+          </div>
+          <div class="name-block">
+            <span class="name-arabic">ٱلرَّحِيمُ</span>
+            <p class="name-transliteration">Ar-Raḥīm</p>
+            <p class="name-meaning">The Especially Merciful</p>
+          </div>
+          <div class="name-block">
+            <span class="name-arabic">ٱلرَّءُوفُ</span>
+            <p class="name-transliteration">Ar-Ra'ūf</p>
+            <p class="name-meaning">The Tenderly Compassionate</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background -->
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">Out of all His names, Allah chose <em>Ar-Raḥmān</em> and <em>Ar-Raḥīm</em> as the opening of 113 surahs — because mercy is the first door to knowing Him. Before creation existed, He wrote above His throne: <em>Inna raḥmatī ghalabat ghaḍabī</em> — "Verily, My mercy prevails over My wrath." Ibn al-Qayyim said this means forgiveness is more beloved to Him than vengeance, mercy more beloved than punishment, giving more beloved than withholding.</p>
+        <p class="body-text">When the soul of Adam (AS) first entered his body and he sneezed, the very first words he heard from his Lord were: <em>Yarḥamuka Allāh</em> — "May Allah have mercy on you." Mercy was humanity's welcome into existence.</p>
+        <p class="body-text">The Prophet ﷺ said Allah created 100 portions of mercy and sent just one down to Earth. Through that single 1%, the entire world is sustained — every act of kindness between humans, animals, and creation. The remaining 99% is reserved for the believers in the Hereafter.</p>
+      </div>
+
+      <!-- Key distinctions -->
+      <div class="section">
+        <p class="section-label">Distinguishing the Three Names</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="compare-table">
+          <thead>
+            <tr><th style="width:130px;">Name</th><th style="width:150px;">Transliteration</th><th>Scope &amp; Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">ٱلرَّحْمَٰنُ</td>
+              <td class="td-translit">Ar-Raḥmān</td>
+              <td>The <em>entirely</em> merciful — pours mercy over all of creation in this life, deserving and undeserving alike. Mentioned in the Qur'an 57 times. The name paired with the Throne: <em>Ar-Raḥmānu 'ala al-'arshi istawā</em> — His mercy governs everything beneath it.</td>
+            </tr>
+            <tr>
+              <td class="td-name">ٱلرَّحِيمُ</td>
+              <td class="td-translit">Ar-Raḥīm</td>
+              <td>The <em>especially</em> merciful — personalises mercy for the believers in the Hereafter. Mentioned 114 times (exactly double Ar-Raḥmān), as if to say: the mercy doubles for those who believe. <em>Wa kāna bil-mu'minīna raḥīmā</em>.</td>
+            </tr>
+            <tr>
+              <td class="td-name">ٱلرَّءُوفُ</td>
+              <td class="td-translit">Ar-Ra'ūf</td>
+              <td>The <em>tenderly compassionate</em> — the highest form of mercy in Arabic. Operates silently: Allah protecting you before you know you needed it, averting harm before it lands, adjusting circumstances in your favour. Almost always paired with Ar-Raḥīm in the Qur'an.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Key Points -->
+      <div class="section">
+        <p class="section-label">Key Points</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:220px;">Point</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Mercy frames all other names</td>
+              <td>Ar-Raḥmān can be added to every other name. He is merciful with His knowledge, His sight, His power. Even when Al-Jabbār and Al-Qahhār show, He never stops being Ar-Raḥmān.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Why cruelty exists</td>
+              <td>Hunger exists not from a shortage of food but from a failure to share. Cruelty exists not from a shortage of Allah's mercy, but from a failure of humans to be its mirrors. We are the trustees of that 1%.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Mercy doesn't cancel justice</td>
+              <td>It would be cruel to the oppressed if the oppressor and victim were treated identically. His mercy is not limited — it is <em>perfect</em>. The question isn't "how can a merciful God send people to Hell?" — it's "why would people choose Hell over a merciful God?"</td>
+            </tr>
+            <tr>
+              <td class="td-label">How to receive more mercy</td>
+              <td><em>Ar-rāḥimūna yarḥamuhum ar-Raḥmān</em> — the merciful will be shown mercy by Ar-Raḥmān. The nearest to Allah are those who combine Ra'ūf and Raḥīm, as the Prophet ﷺ himself was: <em>bil-mu'minīna ra'ūfun raḥīm</em>.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway &amp; Du'ā</p>
+        <p>Mercy is not Allah's mood — it is His constant nature. Wherever you are, it is not out of your reach, because you are <em>something</em> and His mercy encompasses <em>everything</em>.</p>
+        <div class="dua-quote">
+          <p class="dua-ar">يَا رَحْمَٰنُ — يَا رَحِيمُ — يَا رَءُوفُ</p>
+          <p>Yā Raḥmān — embrace every part of me: my past with its scars, my present with its needs, my future with its uncertainty.</p>
+          <p>Yā Raḥīm — let me taste the mercy You keep for those who return. Raise me to the highest place in Paradise despite my lows.</p>
+          <p>Yā Ra'ūf — cover me from storms I don't see coming. Let Your mercy reach me in ways I'll only understand when I finally meet You.</p>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ EPISODE 2 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 02</span>
+      <h2 class="ep-title">Who Owns Your Heart?</h2>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Names Covered</p>
+          <p class="info-value">Al-Wāḥid · Al-Aḥad · Al-Witr</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Source</p>
+          <p class="info-value">Qur'an · Ḥadīth Qudsī · Ibn al-Qayyim · Ibn Taymiyyah</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Tawḥīd as liberation — unifying the heart under one God</p>
+        </div>
+      </div>
+
+      <!-- Names -->
+      <div class="section">
+        <p class="section-label">The Names</p>
+        <div class="names-row">
+          <div class="name-block">
+            <span class="name-arabic">ٱلْوَاحِدُ</span>
+            <p class="name-transliteration">Al-Wāḥid</p>
+            <p class="name-meaning">The One — singular in being</p>
+          </div>
+          <div class="name-block">
+            <span class="name-arabic">ٱلْأَحَدُ</span>
+            <p class="name-transliteration">Al-Aḥad</p>
+            <p class="name-meaning">The Uniquely One — singular in attributes</p>
+          </div>
+          <div class="name-block">
+            <span class="name-arabic">ٱلْوِتْرُ</span>
+            <p class="name-transliteration">Al-Witr</p>
+            <p class="name-meaning">The Odd — the only one of His kind</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background -->
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">The root of <em>Ilāh</em> — as Ibn al-Qayyim explains — is <em>that which hearts adore with complete love, reverence, awe, hope and fear</em>. The heart was designed to seek one master. Allah says: <em>Mā jaʿala Allāhu li-rajulin min qalbayni fī jawfih</em> — Allah has not placed two hearts in a single man's chest. Whoever owns your heart, owns you.</p>
+        <p class="body-text">When the Prophet ﷺ met the father of ʿImrān ibn Ḥusayn, he asked how many gods he worshipped. The man said seven — six on earth, one in heaven. The Prophet ﷺ asked: "But which one do you turn to in hope and fear when everything falls apart?" He said: "The one in the heavens." The Prophet ﷺ said: "Then leave the other six and worship Him alone." He didn't argue theology — he spoke directly to the unsatisfying experience of shirk.</p>
+      </div>
+
+      <!-- Distinguishing -->
+      <div class="section">
+        <p class="section-label">Distinguishing the Three Names</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="compare-table">
+          <thead>
+            <tr><th style="width:130px;">Name</th><th style="width:150px;">Transliteration</th><th>Meaning &amp; Distinction</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">ٱلْوَاحِدُ</td>
+              <td class="td-translit">Al-Wāḥid</td>
+              <td>Singular in His being — negates <em>numbers</em>. There is no God but Him. (You can say <em>rajulun wāḥid</em>, one man, or <em>alf wāḥid</em>, a thousand ones — Wāḥid admits counting.)</td>
+            </tr>
+            <tr>
+              <td class="td-name">ٱلْأَحَدُ</td>
+              <td class="td-translit">Al-Aḥad</td>
+              <td>Singular in His attributes — negates <em>likeness</em>. There is no God <em>like</em> Him. You cannot say <em>rajulun aḥad</em> — Aḥad means no comparison exists. Sūrah al-Ikhlāṣ says <em>Allāhu Aḥad</em>, not <em>Allāhu Wāḥid</em> — not just "one God" but "uniquely one God." Bilāl (RA) repeated <em>Aḥad, Aḥad</em> under torture — knowing this name alone gave him strength enough to die for it.</td>
+            </tr>
+            <tr>
+              <td class="td-name">ٱلْوِتْرُ</td>
+              <td class="td-translit">Al-Witr</td>
+              <td>The only one of His kind — negates <em>pair</em>. Everything in creation comes in pairs: night/day, land/sea, male/female. Allah alone is Al-Witr, truly unpaired. He loves the odd: Witr prayer, odd number of dates at iftar, three sips of water, seven circuits of Tawāf — every act a reminder that He alone stands unmatched.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Key Points -->
+      <div class="section">
+        <p class="section-label">Key Points</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:220px;">Point</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Modern idols</td>
+              <td>The Prophet ﷺ said: "Miserable is the slave of the dirham, the dinar, the dollar, the pound." Career worship, addiction to sin, deriving self-worth from social media validation — worship doesn't end when physical idols are broken. It takes on new forms. Today idols wear designer brands and blue checkmarks.</td>
+            </tr>
+            <tr>
+              <td class="td-label">How shirk is born</td>
+              <td>Shirk is never rational — it's born from insecurity, desire, or imitation. Historically: those who worshipped nature couldn't imagine one power sustaining it all; those who worshipped good &amp; evil couldn't grasp one God governing both; those who shaped God in their image couldn't relate to a God they couldn't see. Every false god is human insecurity, desire, or corruption dressed in divinity.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Allah's response to shirk</td>
+              <td>In a Ḥadīth Qudsī: <em>Anā aghnā al-shurakā'i ʿan al-shirk</em> — "I am the least in need of any partner. Whoever does a deed seeking Me and someone else, I leave him to that someone else." What a punishment: to be left to creation after being offered the Creator.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Uniqueness = accessibility</td>
+              <td>Allah's uniqueness (Al-Witr) doesn't make Him distant — it makes Him unlike creation. A friend drowning in the same crisis can only help so much. Allah, uniquely unlike creation, can be close to every creature at once. Unlimited uniqueness with unlimited accessibility.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Ibn al-Qayyim's formula</td>
+              <td><em>Fa-li-wāḥidin kun wāḥidan fī wāḥid</em> — "For One, be one upon one" — the single path of truth. Unify your pursuits, your heart, your devotion — all directed to Al-Wāḥid Al-Aḥad.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway &amp; Du'ā</p>
+        <p>With Al-Wāḥid you negate all others. With Al-Aḥad you affirm His transcendence. With Al-Witr you recognise His complete singularity. When others scatter their devotion, you direct yours to Him alone — and that is how you become free from all.</p>
+        <div class="dua-quote">
+          <p class="dua-ar">يَا إِلَٰهِي — يَا وَاحِدُ — يَا أَحَدُ — يَا وِتْرُ</p>
+          <p>Yā Ilāhī — pull me away from every false worship, from anything that divides my devotion, until nothing fills my longing but You.</p>
+          <p>Yā Wāḥid — unify my pursuits into a single direction. When the world pulls me apart, centre me in Your oneness.</p>
+          <p>Yā Aḥad — open my heart to see that nothing compares, so I am never overly impressed by anyone but You.</p>
+          <p>Yā Witr — when I stand alone at the close of the night, let my solitude remind me of Your singular majesty. Make my heart distinct by its devotion.</p>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  AlMaghrib Institute · Allah's Names Series · Dr. Omar Suleiman · Ramadan 2026
+</footer>
+
+<button class="pdf-btn" onclick="exportPDF()" title="Save as PDF">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="12" y1="18" x2="12" y2="12"/>
+    <polyline points="9 15 12 18 15 15"/>
+  </svg>
+  <span class="pdf-btn-gold">Export</span>&nbsp;PDF
+</button>
+
+<script>
+  function exportPDF() {
+    document.querySelectorAll('.episode, .episode *').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.animation = 'none';
+      el.style.animationDelay = '0s';
+      el.style.transition = 'none';
+    });
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        document.querySelectorAll('.episode, .episode *').forEach(el => {
+          el.style.opacity = '';
+          el.style.transform = '';
+          el.style.animation = '';
+          el.style.animationDelay = '';
+          el.style.transition = '';
+        });
+      }, 500);
+    }, 150);
+  }
+</script>
+
+</body>
+</html>

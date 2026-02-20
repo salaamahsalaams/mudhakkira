@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مذكّرة · Islamic Notes</title>
+<meta name="description" content="A personal library of notes from Islamic videos, books, and lectures. Because knowledge worth consuming is worth remembering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night:  #07090a;
+    --ink1:   #111518;
+    --ink2:   #1a2020;
+    --border: rgba(255,255,255,0.07);
+    --gold:   #c9a84c;
+    --gold2:  #e8d08a;
+    --cream:  #f0ece3;
+    --muted:  rgba(240,236,227,0.38);
+    --soft:   rgba(240,236,227,0.6);
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--night);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain */
+  body::after {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 0 48px; height: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: rgba(7,9,10,0.85);
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-ar {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 400;
+    color: var(--gold); direction: rtl; letter-spacing: 0.02em;
+  }
+  .logo-sep { width:1px; height:20px; background: var(--border); }
+  .logo-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: rgba(240,236,227,0.45); letter-spacing:0.04em;
+  }
+  .nav-right {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(240,236,227,0.22);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 140px;
+    position: relative; overflow: hidden;
+  }
+
+  /* Glow */
+  .hero::before {
+    content:''; position:absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width:700px; height:480px;
+    background: radial-gradient(ellipse, rgba(40,80,55,0.22) 0%, rgba(201,168,76,0.04) 50%, transparent 75%);
+    pointer-events:none;
+  }
+
+  /* Big faded Arabic */
+  .hero-watermark {
+    position: absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(100px, 20vw, 220px);
+    font-weight: 300; direction: rtl;
+    color: rgba(201,168,76,0.04);
+    pointer-events: none; white-space: nowrap; line-height:1;
+    user-select: none;
+  }
+
+  .hero-inner { position:relative; z-index:1; max-width:600px; }
+
+  .hero-kicker {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px; opacity:0;
+    animation: up 0.9s ease 0.1s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 8vw, 82px);
+    font-weight: 300; line-height: 1.0;
+    color: var(--cream); margin-bottom: 28px;
+    opacity:0; animation: up 0.9s ease 0.22s forwards;
+  }
+  .hero-title em { font-style:italic; color: var(--gold2); }
+
+  .hero-line {
+    width:36px; height:1px; margin:0 auto 28px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity:0; animation: up 0.9s ease 0.32s forwards;
+  }
+
+  .hero-desc {
+    font-size: 15px; color: var(--muted); line-height:1.85;
+    max-width:440px; margin:0 auto 44px;
+    opacity:0; animation: up 0.9s ease 0.42s forwards;
+  }
+  .hero-desc strong { color: var(--soft); font-weight:400; }
+
+  .hero-ayah {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight:300; direction:rtl;
+    color: rgba(201,168,76,0.4); margin-bottom: 8px;
+    opacity:0; animation: up 0.9s ease 0.52s forwards;
+  }
+  .hero-ref {
+    font-size: 11px; letter-spacing:0.14em; text-transform:uppercase;
+    color: rgba(240,236,227,0.16);
+    opacity:0; animation: up 0.9s ease 0.58s forwards;
+  }
+
+  .scroll-hint {
+    position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    z-index:1; opacity:0; animation: up 0.9s ease 0.9s forwards;
+  }
+  .scroll-hint span { font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.15); }
+  .scroll-tick { width:1px; height:32px; background: linear-gradient(to bottom, rgba(201,168,76,0.35), transparent); animation: blink 2s ease infinite; }
+
+  @keyframes up   { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+  @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:0.12} }
+
+  /* ─── LIBRARY ─── */
+  .library {
+    max-width: 1040px; margin:0 auto;
+    padding: 72px 24px 100px;
+    position: relative; z-index:1;
+  }
+
+  .lib-top {
+    display:flex; align-items:flex-end; justify-content:space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px; margin-bottom: 28px; flex-wrap:wrap; gap:12px;
+  }
+  .lib-label { font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .lib-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px,4vw,38px); font-weight:300; color:var(--cream);
+  }
+  .lib-count { font-size:12px; color:rgba(240,236,227,0.2); padding-bottom:2px; letter-spacing:0.04em; }
+
+  /* Type filter */
+  .types { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:28px; }
+  .type-pill {
+    padding:5px 14px; border-radius:14px;
+    border:1px solid rgba(255,255,255,0.09);
+    background:transparent; color:rgba(240,236,227,0.35);
+    font-family:'DM Sans',sans-serif; font-size:12px;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .type-pill:hover, .type-pill.on { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.06); }
+
+  /* ─── CARDS ─── */
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(296px,1fr)); gap:16px; }
+
+  .card {
+    background: var(--ink1);
+    border: 1px solid var(--border);
+    border-radius: 5px; overflow:hidden;
+    display:flex; flex-direction:column;
+    text-decoration:none; color:inherit;
+    transition: transform 0.28s, box-shadow 0.28s, border-color 0.28s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 44px rgba(0,0,0,0.5);
+    border-color: rgba(201,168,76,0.18);
+  }
+
+  .card-stripe { height:2px; }
+  .s-green  { background: linear-gradient(90deg, #2d6247, var(--gold)); }
+  .s-blue   { background: linear-gradient(90deg, #143060, #4a72b8); }
+  .s-purple { background: linear-gradient(90deg, #2d1a50, #7055b8); }
+  .s-amber  { background: linear-gradient(90deg, #6a3c10, var(--gold)); }
+  .s-teal   { background: linear-gradient(90deg, #0f3a3a, #3a9090); }
+
+  .card-body { padding:20px 20px 16px; flex:1; }
+
+  .card-top-row { display:flex; align-items:center; gap:8px; margin-bottom:14px; }
+  .badge {
+    font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase;
+    padding:3px 8px; border-radius:3px;
+  }
+  .b-series  { color:#5ab878; background:rgba(90,184,120,0.1); }
+  .b-video   { color:#5a8fc1; background:rgba(90,143,193,0.1); }
+  .b-book    { color:#c9a84c; background:rgba(201,168,76,0.1); }
+  .b-lecture { color:#a07cd4; background:rgba(160,124,212,0.1); }
+  .b-podcast { color:#5abcbc; background:rgba(90,188,188,0.1); }
+
+  .card-date { font-size:11px; color:rgba(240,236,227,0.18); margin-left:auto; }
+
+  .card-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px; font-weight:400; line-height:1.2;
+    color:var(--cream); margin-bottom:5px;
+  }
+  .card-by { font-size:12px; color:rgba(240,236,227,0.28); margin-bottom:12px; }
+  .card-desc { font-size:13px; color:rgba(240,236,227,0.45); line-height:1.7; margin-bottom:14px; }
+  .card-tags { display:flex; flex-wrap:wrap; gap:4px; }
+  .ctag {
+    font-size:10px; padding:2px 7px; border-radius:9px;
+    border:1px solid rgba(255,255,255,0.07); color:rgba(240,236,227,0.26);
+  }
+
+  .card-foot {
+    padding:11px 20px;
+    border-top:1px solid rgba(255,255,255,0.04);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .card-eps { font-size:11px; color:rgba(240,236,227,0.2); }
+  .card-link { font-size:12px; color:var(--gold); display:flex; align-items:center; gap:4px; }
+
+  /* Empty/placeholder card */
+  .card-placeholder {
+    border:1px dashed rgba(255,255,255,0.06);
+    border-radius:5px; min-height:160px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .card-placeholder p {
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color:rgba(240,236,227,0.12);
+  }
+
+  /* ─── PHILOSOPHY ─── */
+  .philosophy {
+    border-top:1px solid var(--border);
+    padding: 72px 24px;
+    position:relative; z-index:1;
+  }
+  .phil-inner { max-width:580px; margin:0 auto; }
+  .phil-ar {
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px; color:rgba(201,168,76,0.22);
+    direction:rtl; margin-bottom:24px; line-height:1.5;
+  }
+  .phil-p { font-size:14px; color:var(--muted); line-height:1.95; margin-bottom:14px; }
+  .phil-p:last-child { margin-bottom:0; }
+  .phil-p strong { color:var(--soft); font-weight:400; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top:1px solid var(--border);
+    padding:36px 24px; text-align:center;
+    position:relative; z-index:1;
+  }
+  .foot-ar {
+    font-family:'Cormorant Garamond',serif;
+    font-size:17px; color:rgba(201,168,76,0.17); direction:rtl; margin-bottom:12px;
+  }
+  .foot-txt { font-size:11px; color:rgba(240,236,227,0.14); letter-spacing:0.1em; line-height:2.2; }
+
+  /* ─── Scroll reveal ─── */
+  .r { opacity:0; transform:translateY(20px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .r.v { opacity:1; transform:none; }
+  .r1{transition-delay:.04s} .r2{transition-delay:.1s} .r3{transition-delay:.16s} .r4{transition-delay:.22s}
+
+  @media(max-width:600px){
+    /* Nav */
+    nav { padding: 0 16px; height: 56px; }
+    .nav-right, .logo-sep, .logo-en { display: none; }
+    .logo-ar { font-size: 20px; }
+
+    /* Hero */
+    .hero { padding: 90px 16px 64px; }
+    .hero-watermark { font-size: clamp(80px, 30vw, 120px); }
+    .hero-kicker { font-size: 10px; letter-spacing: 0.18em; margin-bottom: 20px; }
+    .hero-title { font-size: clamp(38px, 10vw, 56px); margin-bottom: 20px; }
+    .hero-desc { font-size: 14px; margin-bottom: 32px; }
+    .hero-ayah { font-size: 16px; }
+    .hero-line { margin-bottom: 20px; }
+
+    /* Library */
+    .library { padding: 48px 16px 72px; }
+    .lib-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .lib-heading { font-size: 26px; }
+
+    /* Filter pills — let them scroll horizontally */
+    .types {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+      gap: 6px;
+    }
+    .type-pill { white-space: nowrap; flex-shrink: 0; }
+
+    /* Cards */
+    .grid { grid-template-columns: 1fr; gap: 14px; }
+    .card-body { padding: 18px 16px 14px; }
+    .card-foot { padding: 10px 16px; }
+    .card-title { font-size: 18px; }
+
+    /* Philosophy */
+    .philosophy { padding: 48px 16px; }
+    .phil-ar { font-size: 20px; }
+    .phil-p { font-size: 13px; }
+
+    /* Footer */
+    footer { padding: 32px 16px; }
+  }
+
+  /* Slightly wider — tablet tweaks */
+  @media(min-width:601px) and (max-width:900px){
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .library { padding: 56px 32px 80px; }
+    .hero { padding: 110px 32px 72px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <span class="logo-ar">مذكّرة</span>
+    <span class="logo-sep"></span>
+    <span class="logo-en">Mudhakkira</span>
+  </a>
+  <span class="nav-right">A personal Islamic library</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-watermark">مذكّرة</div>
+  <div class="hero-inner">
+    <p class="hero-kicker">Knowledge · Notes · Reflection</p>
+    <h1 class="hero-title">Don't just<br>consume.<br><em>Remember.</em></h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">
+      A personal collection of notes from <strong>Islamic videos, books, and lectures</strong> —
+      turned into structured, readable pages so the knowledge doesn't just pass through.
+    </p>
+    <p class="hero-ayah">وَذَكِّرْ فَإِنَّ الذِّكْرَىٰ تَنفَعُ الْمُؤْمِنِينَ</p>
+    <p class="hero-ref">And remind — for reminding benefits the believers · 51:55</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Browse</span>
+    <div class="scroll-tick"></div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="library">
+
+  <div class="lib-top r">
+    <div>
+      <p class="lib-label">Library</p>
+      <h2 class="lib-heading">All Notes</h2>
+    </div>
+    <span class="lib-count">2 notes · growing</span>
+  </div>
+
+  <div class="types r">
+    <button class="type-pill on">All</button>
+    <button class="type-pill">Video Series</button>
+    <button class="type-pill">Books</button>
+    <button class="type-pill">Lectures</button>
+    <button class="type-pill">Podcasts</button>
+  </div>
+
+  <div class="grid">
+
+    <!-- Dikr Series -->
+    <a href="dikr_ramadan_tracker.html" target="_blank" class="card r r1">
+      <div class="card-stripe s-green"></div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="badge b-series">Series</span>
+          <span class="card-date">Ramadan 2026</span>
+        </div>
+        <h3 class="card-title">Dikr Ramadan Series</h3>
+        <p class="card-by">Sh. Ammar AlShukry · AlMaghrib · YouTube</p>
+        <p class="card-desc">Notes on the most powerful adhkar from the Sunnah — Arabic with full harakah, meanings, and when and why to say them.</p>
+        <div class="card-tags">
+          <span class="ctag">Dhikr</span>
+          <span class="ctag">Du'ā</span>
+          <span class="ctag">Arabic</span>
+          <span class="ctag">PDF</span>
+        </div>
+      </div>
+      <div class="card-foot">
+        <span class="card-eps">2 episodes</span>
+        <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <!-- Names of Allah -->
+    <a href="allahs_names_tracker.html" target="_blank" class="card r r2">
+      <div class="card-stripe s-blue"></div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="badge b-series">Series</span>
+          <span class="card-date">Ramadan 2026</span>
+        </div>
+        <h3 class="card-title">Allah's Names Series</h3>
+        <p class="card-by">Dr. Omar Suleiman · AlMaghrib · YouTube</p>
+        <p class="card-desc">Notes on the Beautiful Names of Allah — Asmā' ul-Ḥusnā — their meanings, distinctions, and how to live by them daily.</p>
+        <div class="card-tags">
+          <span class="ctag">Asmā' ul-Ḥusnā</span>
+          <span class="ctag">Tawḥīd</span>
+          <span class="ctag">Arabic</span>
+          <span class="ctag">PDF</span>
+        </div>
+      </div>
+      <div class="card-foot">
+        <span class="card-eps">2 episodes</span>
+        <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <!-- Placeholder -->
+    <div class="card-placeholder r r3"><p>More notes on the way</p></div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="phil-inner r">
+    <p class="phil-ar">اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ</p>
+    <p class="phil-p">
+      We live in an age of endless content. Most of it passes through and leaves nothing behind —
+      a lecture watched, a book opened, a video that felt important in the moment and was forgotten by evening.
+    </p>
+    <p class="phil-p">
+      These notes are the antidote to that. Whenever something is worth consuming,
+      it gets turned into a <strong>structured, readable page</strong> — Arabic preserved, key points distilled,
+      takeaways clear. Free to read. Free to download. Free to share.
+    </p>
+    <p class="phil-p">
+      If it helped, pass it on.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="foot-ar">وَاللَّهُ يَعْلَمُ وَأَنتُمْ لَا تَعْلَمُونَ</p>
+  <p class="foot-txt">
+    مذكّرة · A personal Islamic library<br>
+    Free to read, download &amp; share
+  </p>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+  document.querySelectorAll('.type-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.type-pill').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+    });
+  });
+</script>
+
+</body>
+</html>

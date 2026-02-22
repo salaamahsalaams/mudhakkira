@@ -203,6 +203,7 @@
   .s-purple { background: linear-gradient(90deg, #2d1a50, #7055b8); }
   .s-amber  { background: linear-gradient(90deg, #6a3c10, var(--gold)); }
   .s-teal   { background: linear-gradient(90deg, #0f3a3a, #3a9090); }
+  .s-rose   { background: linear-gradient(90deg, #4a1030, #b05878); }
 
   .card-body { padding:20px 20px 16px; flex:1; }
 
@@ -240,15 +241,14 @@
   .card-eps { font-size:11px; color:rgba(240,236,227,0.2); }
   .card-link { font-size:12px; color:var(--gold); display:flex; align-items:center; gap:4px; }
 
-  /* Empty/placeholder card */
-  .card-placeholder {
-    border:1px dashed rgba(255,255,255,0.06);
-    border-radius:5px; min-height:160px;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .card-placeholder p {
-    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
-    color:rgba(240,236,227,0.12);
+  /* More notes caption */
+  .lib-more {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(240,236,227,0.15);
   }
 
   /* ─── PHILOSOPHY ─── */
@@ -377,7 +377,7 @@
       <p class="lib-label">Library</p>
       <h2 class="lib-heading">All Notes</h2>
     </div>
-    <span class="lib-count">2 notes · growing</span>
+    <span class="lib-count">4 notes · growing</span>
   </div>
 
   <div class="types r">
@@ -385,20 +385,19 @@
     <button class="type-pill">Video Series</button>
     <button class="type-pill">Books</button>
     <button class="type-pill">Lectures</button>
-    <button class="type-pill">Podcasts</button>
   </div>
 
   <div class="grid">
 
     <!-- Dikr Series -->
-    <a href="dikr_ramadan_tracker.html" target="_blank" class="card r r1">
+    <a href="dikr_ramadan_tracker.html" target="_blank" class="card r r1" data-type="series">
       <div class="card-stripe s-green"></div>
       <div class="card-body">
         <div class="card-top-row">
           <span class="badge b-series">Series</span>
           <span class="card-date">Ramadan 2026</span>
         </div>
-        <h3 class="card-title">Dikr Ramadan Series</h3>
+        <h3 class="card-title">Dhikr Ramadan Series</h3>
         <p class="card-by">Sh. Ammar AlShukry · AlMaghrib · YouTube</p>
         <p class="card-desc">Notes on the most powerful adhkar from the Sunnah — Arabic with full harakah, meanings, and when and why to say them.</p>
         <div class="card-tags">
@@ -409,13 +408,13 @@
         </div>
       </div>
       <div class="card-foot">
-        <span class="card-eps">2 episodes</span>
+        <span class="card-eps">5 episodes</span>
         <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
     <!-- Names of Allah -->
-    <a href="allahs_names_tracker.html" target="_blank" class="card r r2">
+    <a href="allahs_names_tracker.html" target="_blank" class="card r r2" data-type="series">
       <div class="card-stripe s-blue"></div>
       <div class="card-body">
         <div class="card-top-row">
@@ -423,7 +422,7 @@
           <span class="card-date">Ramadan 2026</span>
         </div>
         <h3 class="card-title">Allah's Names Series</h3>
-        <p class="card-by">Dr. Omar Suleiman · AlMaghrib · YouTube</p>
+        <p class="card-by">Dr. Omar Suleiman · Yaqeen Institute · YouTube</p>
         <p class="card-desc">Notes on the Beautiful Names of Allah — Asmā' ul-Ḥusnā — their meanings, distinctions, and how to live by them daily.</p>
         <div class="card-tags">
           <span class="ctag">Asmā' ul-Ḥusnā</span>
@@ -433,15 +432,64 @@
         </div>
       </div>
       <div class="card-foot">
+        <span class="card-eps">5 episodes</span>
+        <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+
+    <!-- Fiqh of Menstruation -->
+    <a href="menstruation_tracker.html" target="_blank" class="card r r3" data-type="lecture">
+      <div class="card-stripe s-rose"></div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="badge b-lecture">Lecture</span>
+          <span class="card-date">Fiqh Series</span>
+        </div>
+        <h3 class="card-title">Fiqh of Menstruation</h3>
+        <p class="card-by">Fiqh of Ṭahārah · YouTube</p>
+        <p class="card-desc">Notes on the complete rulings of ḥayḍ and nifās — what counts as a period, the three categories of women, the six prohibitions, and prayer obligations when becoming pure.</p>
+        <div class="card-tags">
+          <span class="ctag">Fiqh</span>
+          <span class="ctag">Ṭahārah</span>
+          <span class="ctag">Women's Rulings</span>
+          <span class="ctag">PDF</span>
+        </div>
+      </div>
+      <div class="card-foot">
+        <span class="card-eps">1 episode</span>
+        <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <!-- Learning Quranic Arabic -->
+    <a href="quranic_arabic_tracker.html" target="_blank" class="card r r4" data-type="series">
+      <div class="card-stripe s-amber"></div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="badge b-series">Series</span>
+          <span class="card-date">Playlist</span>
+        </div>
+        <h3 class="card-title">Learning Qur'anic Arabic</h3>
+        <p class="card-by">YouTube · Language Series</p>
+        <p class="card-desc">A structured roadmap to reading the Qur'ān with understanding — from Arabic literacy to Qur'ānic vocabulary, including the 72 words that cover 45% of the entire Qur'ān.</p>
+        <div class="card-tags">
+          <span class="ctag">Vocabulary</span>
+          <span class="ctag">Grammar</span>
+          <span class="ctag">Language</span>
+          <span class="ctag">PDF</span>
+        </div>
+      </div>
+      <div class="card-foot">
         <span class="card-eps">2 episodes</span>
         <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
-    <!-- Placeholder -->
-    <div class="card-placeholder r r3"><p>More notes on the way</p></div>
-
   </div>
+
+  <p class="lib-more r r3">More notes being added throughout Ramadan</p>
+
 </section>
 
 <!-- PHILOSOPHY -->
@@ -482,6 +530,17 @@
     btn.addEventListener('click', () => {
       document.querySelectorAll('.type-pill').forEach(b => b.classList.remove('on'));
       btn.classList.add('on');
+
+      const label = btn.textContent.trim().toLowerCase();
+      document.querySelectorAll('.card[data-type]').forEach(card => {
+        const type = card.dataset.type;
+        const visible =
+          label === 'all' ||
+          (label === 'video series' && type === 'series') ||
+          (label === 'books'        && type === 'book')   ||
+          (label === 'lectures'     && type === 'lecture');
+        card.style.display = visible ? '' : 'none';
+      });
     });
   });
 </script>

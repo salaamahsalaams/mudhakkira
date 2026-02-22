@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dikr Ramadan Series — Tracker</title>
+<title>Dhikr Ramadan Series — Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -99,18 +99,7 @@
   .main { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
 
   /* ── Episode Card ── */
-  .episode {
-    margin-top: 64px;
-    opacity: 0;
-    transform: translateY(24px);
-    animation: fadeUp 0.6s ease forwards;
-  }
-  .episode:nth-child(1) { animation-delay: 0.1s; }
-  .episode:nth-child(2) { animation-delay: 0.25s; }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .episode { margin-top: 64px; }
 
   .ep-banner {
     display: flex;
@@ -156,10 +145,33 @@
     background: #fff;
   }
 
+  /* ── Watch Link ── */
+  .ep-watch-link {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 16px;
+    border: 1px solid rgba(201,168,76,0.45);
+    border-radius: 2px;
+    background: rgba(201,168,76,0.08);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .ep-watch-link:hover { background: rgba(201,168,76,0.22); }
+
   /* ── Info Strip ── */
   .info-strip {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     border-bottom: 1px solid var(--rule);
   }
   .info-item {
@@ -169,7 +181,7 @@
   .info-item:last-child { border-right: none; }
   .info-label {
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--green-accent);
@@ -214,6 +226,7 @@
     display: block;
     word-break: keep-all;
   }
+  .dua-arabic.long { font-size: 30px; line-height: 2; }
   .dua-transliteration {
     font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
@@ -348,44 +361,6 @@
     letter-spacing: 0.05em;
   }
 
-  @media (max-width: 640px) {
-    /* Layout */
-    .site-header { padding: 32px 16px 28px; }
-    .header-title { font-size: 32px; }
-    .header-subtitle { font-size: 16px; }
-    .header-meta { gap: 8px; }
-    .main { padding: 0 16px 60px; }
-
-    /* Episode cards */
-    .episode { margin-top: 32px; }
-    .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
-    .ep-title { font-size: 20px; }
-
-    /* Info strip — stack vertically */
-    .info-strip { grid-template-columns: 1fr; }
-    .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
-
-    /* Sections */
-    .section { padding: 16px; }
-
-    /* Arabic */
-    .dua-arabic { font-size: 30px; }
-    .dua-block { padding: 20px 16px 16px; }
-
-    /* Tables — let them scroll */
-    .points-table, .dua-table { min-width: 480px; }
-    .points-table .td-label, .dua-table .td-arabic { white-space: normal; }
-
-    /* Footer */
-    .site-footer { padding: 28px 16px; }
-
-    /* PDF button — smaller, anchored to bottom edge */
-    .pdf-btn {
-      bottom: 16px; right: 16px;
-      padding: 11px 16px; font-size: 12px; gap: 7px;
-    }
-  }
-
   /* ── PDF Button ── */
   .pdf-btn {
     position: fixed;
@@ -418,17 +393,15 @@
   .pdf-btn svg { flex-shrink: 0; }
   .pdf-btn-gold { color: var(--gold); font-weight: 500; }
 
-  /* ── Print / PDF styles ── */
+  /* ── Print ── */
   @media print {
     @page { size: A4; margin: 12mm 14mm 12mm 14mm; }
 
-    /* Force colour rendering */
     * {
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
 
-    /* Kill ALL animations globally — this is the main fix for white space */
     *, *::before, *::after {
       animation: none !important;
       -webkit-animation: none !important;
@@ -440,6 +413,7 @@
     body { background: #fff; font-size: 11pt; }
 
     .pdf-btn { display: none !important; }
+    .ep-watch-link { display: none !important; }
 
     .site-header {
       padding: 28px 28px 22px !important;
@@ -454,14 +428,11 @@
 
     .episode { margin-top: 20px; }
 
-    /* Keep each episode together if possible */
     .ep-banner { background: #1a3828 !important; page-break-after: avoid; break-after: avoid; }
     .ep-body { page-break-before: avoid; break-before: avoid; }
 
-    /* Sections should not break mid-way */
     .section { break-inside: avoid; page-break-inside: avoid; }
 
-    /* Colours */
     .takeaway {
       background: #0f2318 !important;
       color: rgba(255,255,255,0.92) !important;
@@ -482,18 +453,50 @@
 
     .site-footer { margin-top: 16px; padding: 20px; }
   }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 32px 16px 28px; }
+    .header-title { font-size: 32px; }
+    .header-subtitle { font-size: 16px; }
+    .header-meta { gap: 8px; }
+    .main { padding: 0 16px 60px; }
+
+    .episode { margin-top: 32px; }
+    .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
+    .ep-title { font-size: 20px; }
+    .ep-watch-link { display: none; }
+
+    .info-strip { grid-template-columns: 1fr; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
+
+    .section { padding: 16px; }
+
+    .dua-arabic { font-size: 30px; }
+    .dua-arabic.long { font-size: 22px; }
+    .dua-block { padding: 20px 16px 16px; }
+
+    .points-table, .dua-table { min-width: 480px; }
+    .points-table .td-label, .dua-table .td-arabic { white-space: normal; }
+
+    .site-footer { padding: 28px 16px; }
+
+    .pdf-btn {
+      bottom: 16px; right: 16px;
+      padding: 11px 16px; font-size: 12px; gap: 7px;
+    }
+  }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
-    <p class="header-label">AlMaghrib Institute · YouTube</p>
-    <h1 class="header-title">Dikr Ramadan Series</h1>
+    <p class="header-label">AlMaghrib · YouTube · Ramadan Series</p>
+    <h1 class="header-title">Dhikr Ramadan Series</h1>
     <p class="header-subtitle">Episode Tracker</p>
     <div class="header-meta">
       <span class="meta-pill">Sh. Ammar AlShukry</span>
-      <span class="meta-pill">Dhikr &amp; Du'a</span>
+      <span class="meta-pill">Dhikr &amp; Du'ā</span>
       <span class="meta-pill">Ramadan Series</span>
     </div>
   </div>
@@ -505,18 +508,17 @@
   <article class="episode">
     <div class="ep-banner">
       <span class="ep-number">Ep 01</span>
-      <h2 class="ep-title">This Destroys EVERY Problem</h2>
+      <h2 class="ep-title">This Destroys Every Problem</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=5t9k_ZOY1DI&amp;t=324s" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
     </div>
     <div class="ep-body">
 
       <div class="info-strip">
         <div class="info-item">
           <p class="info-label">Dhikr</p>
-          <p class="info-value">La Hawla wa La Quwwata illa Billah</p>
-        </div>
-        <div class="info-item">
-          <p class="info-label">Source</p>
-          <p class="info-value">Bukhari &amp; Muslim · Imam Ahmad · Al-Bayhaqi</p>
+          <p class="info-value">Lā Ḥawla wa Lā Quwwata illā Billāh</p>
         </div>
         <div class="info-item">
           <p class="info-label">Theme</p>
@@ -527,22 +529,22 @@
       <div class="section">
         <p class="section-label">The Dhikr</p>
         <div class="dua-block">
-          <span class="dua-arabic">لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ</span>
+          <span class="dua-arabic">لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</span>
           <p class="dua-transliteration">Lā ḥawla wa lā quwwata illā billāh</p>
           <p class="dua-meaning">There is no transformation or power except through Allah</p>
         </div>
         <p class="body-text" style="margin-top:14px; font-size:13px; color:var(--ink-muted);">
-          <em>Note:</em> Ḥawl derives from taḥwīl — transformation, the shift from one ḥāl (state) to another. The phrase means: no change of state, and no strength to do anything, is possible except through Allah.
+          <em>Note:</em> Ḥawl derives from taḥwīl — transformation, the shift from one state (ḥāl) to another. The phrase means: no change of state, and no strength to do anything, is possible except through Allah.
         </p>
       </div>
 
       <div class="section">
         <p class="section-label">Background</p>
-        <p class="body-text">The Prophet ﷺ called it "a treasure from the treasures of Paradise" and specifically taught it to 19 companions. It is also listed by the Prophet ﷺ as one of the <em>al-Baqiyāt al-Ṣāliḥāt</em> — the "remaining righteous deeds" mentioned in Sūrah al-Kahf (18:46), alongside SubḥānAllah, Alḥamdulillah, Lā ilāha illAllāh, and Allāhu Akbar.</p>
+        <p class="body-text">The Prophet ﷺ called it "a treasure from the treasures of Paradise" and taught it to 19 companions by name. It is also one of the five <em>al-Baqiyāt al-Ṣāliḥāt</em> — the remaining righteous deeds — mentioned in Sūrah al-Kahf (18:46), alongside SubḥānAllāh, Alḥamdulillāh, Lā ilāha illAllāh, and Allāhu Akbar.</p>
       </div>
 
       <div class="section">
-        <p class="section-label">When &amp; Why to Use It</p>
+        <p class="section-label">When &amp; Why to Say It</p>
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
           <thead>
             <tr><th style="width:200px;">Point</th><th>Detail</th></tr>
@@ -553,24 +555,24 @@
               <td>Just as <em>Lā ilāha illAllāh</em> declares Allah the only object of worship, this phrase declares Him the only source of help — mirroring <em>Iyyāka nastaʿīn</em> in al-Fātiḥah.</td>
             </tr>
             <tr>
-              <td class="td-label">Allah's Response</td>
-              <td>When a person says it, Allah declares: "My slave has submitted and surrendered." (Al-Bayhaqi — the Prophet ﷺ said: <em>aslama ʿabdī wa-staslam</em>)</td>
+              <td class="td-label">Allah's response</td>
+              <td>When you say it, Allah declares: "My servant has submitted and surrendered." (Al-Bayhaqi)</td>
             </tr>
             <tr>
-              <td class="td-label">Response to Adhān</td>
-              <td>When you hear <em>ḥayya ʿala al-ṣalāh / al-falāḥ</em>, respond with this phrase — admitting you cannot move from heedlessness to prayer without Allah's help.</td>
+              <td class="td-label">At the Adhān</td>
+              <td>When you hear <em>ḥayya ʿala al-ṣalāh</em>, respond with this — admitting you cannot move from heedlessness to prayer without His help.</td>
             </tr>
             <tr>
-              <td class="td-label">Leaving the House</td>
-              <td><em>Bismillāh, tawakkaltu ʿala Allāh, wa lā ḥawla wa lā quwwata illā billāh</em> — the Prophet ﷺ said: you will be guided, sufficed, protected, and Shayṭān will turn away.</td>
+              <td class="td-label">Leaving the house</td>
+              <td>Say it with Bismillāh and tawakkul when leaving home — the Prophet ﷺ promised: you will be guided, sufficed, protected, and Shayṭān will turn away.</td>
             </tr>
             <tr>
-              <td class="td-label">For Hardship</td>
-              <td>Ibn Taymiyyah: "Let his constant refuge be this phrase — through it, terrors are met, burdens are carried, and lofty stations are reached."</td>
+              <td class="td-label">For hardship &amp; sin</td>
+              <td>Ibn Taymiyyah (RH): "Let his constant refuge be this phrase — through it, terrors are met, burdens are carried, and lofty stations are reached."</td>
             </tr>
             <tr>
-              <td class="td-label">For the Evil Eye</td>
-              <td>Qur'an 18:39 — say <em>Māshā'Allāh, lā quwwata illā billāh</em> when entering a blessing, to protect it and yourself.</td>
+              <td class="td-label">Against the evil eye</td>
+              <td>Say <em>Māshā'Allāh, lā quwwata illā billāh</em> (Qur'an 18:39) when you see a blessing — to protect it and yourself.</td>
             </tr>
           </tbody>
         </table></div>
@@ -578,7 +580,7 @@
 
       <div class="section takeaway">
         <p class="section-label">Takeaway</p>
-        <p>Every transformation — from sickness to health, weakness to strength, sin to obedience — comes only from Allah. Say it when overwhelmed, exhausted, tempted, or struck by news. It is an act of surrender that invites divine assistance.</p>
+        <p>Every transformation — from sickness to health, from sin to obedience — comes only from Allah. Say it when overwhelmed, exhausted, tempted, or struck by news. It is an act of surrender that invites His help.</p>
       </div>
 
     </div>
@@ -588,22 +590,21 @@
   <article class="episode">
     <div class="ep-banner">
       <span class="ep-number">Ep 02</span>
-      <h2 class="ep-title">The Power of the Du'ā of Yūnus</h2>
+      <h2 class="ep-title">The Du'ā of Yūnus (AS)</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=uaDqm2rMYzY&amp;t=10s" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
     </div>
     <div class="ep-body">
 
       <div class="info-strip">
         <div class="info-item">
           <p class="info-label">Dhikr</p>
-          <p class="info-value">Du'ā of Yūnus (Dhu al-Nūn) — 3 phrases</p>
-        </div>
-        <div class="info-item">
-          <p class="info-label">Source</p>
-          <p class="info-value">Qur'an 21:87–88 · Al-Tirmidhī</p>
+          <p class="info-value">Du'ā of Yūnus — 3 phrases</p>
         </div>
         <div class="info-item">
           <p class="info-label">Theme</p>
-          <p class="info-value">Distress, Tawḥīd, glorification &amp; confession as path to relief</p>
+          <p class="info-value">Distress, Tawḥīd, glorification &amp; confession as the path to relief</p>
         </div>
       </div>
 
@@ -639,40 +640,40 @@
 
       <div class="section">
         <p class="section-label">Background</p>
-        <p class="body-text">Yūnus (AS) was sent to Nineveh — a city of 100,000+, possibly the largest on earth at the time. After years of rejection he left without Allah's permission. Allah then softened the people's hearts and they repented en masse: the only city in history whose faith after seeing a sign of punishment was accepted (10:98).</p>
-        <p class="body-text">Meanwhile Yūnus was on a storm-struck ship. Lots were drawn three times — each time falling on him. Thrown overboard, he was swallowed by a whale. Waking in complete darkness, he realised he was alive, prostrated to Allah, and made this du'ā.</p>
+        <p class="body-text">Yūnus (AS) was sent to a city of over 100,000 people — possibly the largest on earth at the time. After years of rejection, he left without Allah's permission. Meanwhile, Allah cast repentance into the people's hearts and they all wept and turned to Him — the only city in history whose faith, after seeing the signs of punishment, was accepted.</p>
+        <p class="body-text">Yūnus (AS), now on a storm-struck ship, had lots drawn three times — each time falling on him. Thrown overboard and swallowed by a whale, in total darkness he realised he was alive, prostrated to Allah, and made this du'ā.</p>
       </div>
 
       <div class="section">
-        <p class="section-label">The Four Elements of the Du'ā</p>
+        <p class="section-label">The Four Elements</p>
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
           <thead>
             <tr><th style="width:200px;">Element</th><th>Explanation</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td class="td-label">1 — Tawḥīd</td>
-              <td>Declaring that only Allah has power and only He deserves to be called upon.</td>
+              <td class="td-label">Tawḥīd</td>
+              <td>Only Allah has power and only He deserves to be called upon. Nothing else can save you.</td>
             </tr>
             <tr>
-              <td class="td-label">2 — Tasbīḥ</td>
-              <td>Glorifying Allah above every imperfection — even in darkest distress affirming: "What happened to me is not injustice from You. You are perfect."</td>
+              <td class="td-label">Tasbīḥ</td>
+              <td>Even in darkest distress, affirming: "What happened to me is not injustice from You. You are perfect." You exalt Allah above the situation, not despite it.</td>
             </tr>
             <tr>
-              <td class="td-label">3 — Servitude</td>
-              <td>Acknowledging complete dependence and need for Allah.</td>
+              <td class="td-label">Servitude</td>
+              <td>Acknowledging complete dependence on Allah — you are His servant in need, not an equal making demands.</td>
             </tr>
             <tr>
-              <td class="td-label">4 — Confession</td>
-              <td>Admitting wrongdoing without explicitly asking forgiveness — the request is eloquently implied in the description of one's own state.</td>
+              <td class="td-label">Confession</td>
+              <td>Admitting wrongdoing without explicitly asking forgiveness — the request is eloquently implied in the description of your own state.</td>
             </tr>
             <tr>
-              <td class="td-label">The Promise</td>
+              <td class="td-label">The promise</td>
               <td>The Prophet ﷺ: "No Muslim supplicates with it for anything ever except that Allah responds." (Al-Tirmidhī)</td>
             </tr>
             <tr>
-              <td class="td-label">Universal Application</td>
-              <td>Every believer has a "whale" — fear, anxiety, addiction, negligence. Allah's rescue of Yūnus is His template for saving all believers in every time and place (21:88).</td>
+              <td class="td-label">Your whale</td>
+              <td>Every believer has a whale — fear, anxiety, addiction, negligence. Allah's rescue of Yūnus is His template for saving all believers in every time and place (21:88).</td>
             </tr>
           </tbody>
         </table></div>
@@ -680,7 +681,270 @@
 
       <div class="section takeaway">
         <p class="section-label">Takeaway</p>
-        <p>Say these three phrases when you feel trapped, hopeless, or stuck. You are declaring Tawḥīd, glorifying Allah, acknowledging your need, and confessing your shortcomings — the most direct path to relief from any hardship.</p>
+        <p>Say these three phrases when you feel trapped, hopeless, or stuck. You are declaring Tawḥīd, exalting Allah, acknowledging your need, and confessing your shortcomings — the most direct path to relief from any hardship.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ EPISODE 3 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 03</span>
+      <h2 class="ep-title">The Du'ā to Say at Iftar</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=3cPtP2NIdpI" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Dhikr</p>
+          <p class="info-value">Du'ā at Breaking the Fast — 3 phrases</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Gratitude, humility &amp; the principle that hardship passes but reward remains</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Dhikr</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="dua-table">
+          <thead>
+            <tr>
+              <th class="arabic-col" style="width:40%;">Arabic</th>
+              <th style="width:30%;">Transliteration</th>
+              <th style="width:30%;">Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-arabic">ذَهَبَ الظَّمَأُ</td>
+              <td class="td-translit">Dhahaba al-ẓama'u</td>
+              <td>The thirst is gone</td>
+            </tr>
+            <tr>
+              <td class="td-arabic">وَابْتَلَّتِ الْعُرُوقُ</td>
+              <td class="td-translit">Wabtallatil-'urūqu</td>
+              <td>The veins are moistened</td>
+            </tr>
+            <tr>
+              <td class="td-arabic">وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ</td>
+              <td class="td-translit">Wa thabata al-ajru inshā'Allāh</td>
+              <td>And the reward is confirmed, if Allah wills</td>
+            </tr>
+          </tbody>
+        </table></div>
+        <p class="body-text" style="margin-top:14px; font-size:13px; color:var(--ink-muted);">
+          <em>Source:</em> Narrated by Ibn ʿUmar (RA), reported by Abu Dawud.
+        </p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">Before you eat at iftar, say this. The Prophet ﷺ taught us to mark the end of the fast not just with food but with acknowledgement — the thirst passed, the body is being restored, and the reward was hopefully earned. The <em>inshā'Allāh</em> at the end is a deliberate reminder of humility: you completed the action, but only Allah knows if He accepted it.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Breaking It Down</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead>
+            <tr><th style="width:200px;">Point</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Even if not thirsty</td>
+              <td>Say the du'ā regardless — you are acknowledging the principle of fasting (that it involves thirst), not just your personal experience that particular day.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Why "inshā'Allāh" for the reward</td>
+              <td>You don't know if your fast was spiritually intact. The Prophet ﷺ said: "How many a person fasts and gets nothing except hunger and thirst" — because they violated the fast with backbiting, lying, or insincerity.</td>
+            </tr>
+            <tr>
+              <td class="td-label">The law of worship vs sin</td>
+              <td>Hardship of obedience is temporary — its reward is permanent. Pleasure of sin is temporary — its consequences are lasting. This du'ā puts that reality into words at the moment you feel it most.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Make du'ā all day</td>
+              <td>The fasting person has an accepted du'ā throughout the fast, not just at iftar. Don't wait for the last moments — call on Allah while you're driving, sitting, or waiting.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Be present at iftar</td>
+              <td>Iftar is a social event, but before the food arrives — take that moment. Say the du'ā mindfully. Ask for acceptance. Then eat.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>This du'ā is the spiritual close to your day of fasting. Say it before you reach for food — not as a habit, but as a genuine moment of acknowledgement before Allah.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ EPISODE 4 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 04</span>
+      <h2 class="ep-title">This Du'ā Covers Everything You Could Need</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=3ag8QFdR6P4" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Dhikr</p>
+          <p class="info-value">Du'ā al-Qunūt — the Witr supplication</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Six comprehensive requests: guidance, wellness, Allah's friendship, baraka, protection &amp; praise</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Dhikr</p>
+        <div class="dua-block">
+          <span class="dua-arabic long">اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ وَعَافِنِي فِيمَنْ عَافَيْتَ وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ وَبَارِكْ لِي فِيمَا أَعْطَيْتَ وَقِنِي شَرَّ مَا قَضَيْتَ فَإِنَّكَ تَقْضِي وَلَا يُقْضَى عَلَيْكَ وَإِنَّهُ لَا يَذِلُّ مَنْ وَالَيْتَ وَلَا يَعِزُّ مَنْ عَادَيْتَ تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ</span>
+          <p class="dua-transliteration">Allāhumma ihdinī fīman hadayt, wa ʿāfinī fīman ʿāfayt, wa tawallanī fīman tawallayt, wa bārik lī fīmā aʿṭayt, wa qinī sharra mā qaḍayt. Fa-innaka taqḍī wa lā yuqḍā ʿalayk. Wa innahū lā yadhillu man wālayt, wa lā yaʿizzu man ʿādayt. Tabārakta rabbanā wa taʿālayt.</p>
+          <p class="dua-meaning">O Allah, guide me amongst those You've guided; grant me wellness amongst those You've given wellness; befriend me amongst those You've befriended; bless me in what You've given me; protect me from the evil of what You've decreed. For You decree and none decrees over You. None is humiliated whom You support, and none is honoured whom You oppose. Blessed are You, our Lord, and Exalted.</p>
+        </div>
+        <p class="body-text" style="margin-top:14px; font-size:13px; color:var(--ink-muted);">
+          <em>Source:</em> Narrated by al-Ḥasan ibn ʿAlī (RA), reported by Abu Dawud and al-Tirmidhī.
+        </p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">The Prophet ﷺ personally taught this du'ā to his grandson al-Ḥasan ibn ʿAlī (RA) — who was under 10 years old — for his Witr prayer. It shows that the Prophet ﷺ invested in his family's children, not just adults. Six requests in one du'ā. Less than 30 seconds to say.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Breaking Down the Du'ā</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead>
+            <tr><th style="width:200px;">Request</th><th>What It Means</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">اهْدِنِي — Guide me</td>
+              <td>Guidance has multiple levels — to good deeds, to acting on what you know, to better actions, to consistency, and to die upon goodness. You need all of them at every stage of life.</td>
+            </tr>
+            <tr>
+              <td class="td-label">عَافِنِي — Give me wellness</td>
+              <td>Comprehensive well-being — from disease, from bad character, from innovation, from misguidance. Not just the body; the heart and religion too.</td>
+            </tr>
+            <tr>
+              <td class="td-label">تَوَلَّنِي — Befriend me</td>
+              <td>Asking Allah to take charge of your affairs and not leave you to yourself — even for a moment's blink. The believers are the allies of Allah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">بَارِكْ لِي — Bless me</td>
+              <td>Baraka is quality over quantity. Some live 100 years and accomplish nothing; others leave a legacy at 20. Make my limited time and resources go far.</td>
+            </tr>
+            <tr>
+              <td class="td-label">قِنِي شَرَّ مَا قَضَيْتَ — Protect me from evil</td>
+              <td>Evil is in creation, not in Allah's action. When rain causes a flood, the evil is in the circumstance — not in Allah decreeing it. You're asking Him to turn that evil away from you.</td>
+            </tr>
+            <tr>
+              <td class="td-label">لَا يَذِلُّ مَنْ وَالَيْتَ — None humiliated whom You support</td>
+              <td>Physical harm is not humiliation. Companions were wounded and killed, yet Allah said: "You are superior if you are believers." Humiliation is internal — and it only comes from disobedience.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>This is the only sunnah-legislated du'ā for the Witr prayer — short, comprehensive, and profound. Say it every Witr, not just in Ramadan.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ EPISODE 5 ═══════════════════════════ -->
+  <article class="episode">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 05</span>
+      <h2 class="ep-title">The Master of Seeking Forgiveness</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=Opgobt4iWBA" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Dhikr</p>
+          <p class="info-value">Sayyid al-Istighfār — Master of Seeking Forgiveness</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Complete framework of repentance — Lordship, servitude, covenant, confession &amp; forgiveness</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Dhikr</p>
+        <div class="dua-block">
+          <span class="dua-arabic long">اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ</span>
+          <p class="dua-transliteration">Allāhumma anta rabbī, lā ilāha illā anta, khalaqtanī wa anā ʿabduka, wa anā ʿalā ʿahdika wa waʿdika mastaṭaʿt. Aʿūdhu bika min sharri mā ṣanaʿt. Abū'u laka biniʿmatika ʿalayya wa abū'u bidhanbī. Faghfirlī fa-innahū lā yaghfiru al-dhunūba illā ant.</p>
+          <p class="dua-meaning">O Allah, You are my Lord. There is no deity worthy of worship except You. You created me and I am Your servant, and I am faithful to my covenant and promise to You as much as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me, and I acknowledge my sin. So forgive me — for indeed none forgives sins except You.</p>
+        </div>
+        <p class="body-text" style="margin-top:14px; font-size:13px; color:var(--ink-muted);">
+          <em>Source:</em> Narrated by Shaddād ibn Aws (RA), Ṣaḥīḥ al-Bukhārī (7393).
+        </p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">The Prophet ﷺ called this Sayyid al-Istighfār — the master of all forms of seeking forgiveness. It is not just "sorry" or "forgive me." It is a complete picture of your relationship with Allah: who He is, who you are, what He has given you, and what you have done in return. Whoever says it during the day with firm faith and dies before evening, or says it at night and dies before morning, is promised paradise.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Breaking Down the Du'ā</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead>
+            <tr><th style="width:200px;">Phrase</th><th>What It Means</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">أَنْتَ رَبِّي — You are my Lord</td>
+              <td>Starting with acknowledgement — He sustains you, manages your life, provides and protects. He is running things, not you.</td>
+            </tr>
+            <tr>
+              <td class="td-label">لَا إِلَهَ إِلَّا أَنْتَ — No deity except You</td>
+              <td>Moving from Lordship to worship — since You are my creator and provider, You alone deserve my worship. Not career, not status, not desires.</td>
+            </tr>
+            <tr>
+              <td class="td-label">أَنَا عَبْدُكَ — I am Your servant</td>
+              <td>Declaring your position honestly — not equal, not independent. Every person, regardless of title or achievement, says in this du'ā: "I am nothing but Your servant."</td>
+            </tr>
+            <tr>
+              <td class="td-label">عَلَى عَهْدِكَ مَا اسْتَطَعْتُ — As much as I can</td>
+              <td>Humility — not "I'm doing well," but "I'm trying with my weak capacity." Without this phrase, you'd be lying. None of us can fulfil Allah's rights the way they deserve.</td>
+            </tr>
+            <tr>
+              <td class="td-label">أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ — I seek refuge from my deeds</td>
+              <td>Running TO Allah because of your sins — not away from Him. You're not fleeing from Allah; you're fleeing to Him. Where else would you go?</td>
+            </tr>
+            <tr>
+              <td class="td-label">أَبُوءُ بِنِعْمَتِكَ...وَبِذَنْبِي — I acknowledge favour and sin</td>
+              <td>The contrast that changes everything — from You is every blessing, from me is every shortcoming. When you truly internalise this, arrogance becomes impossible.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>Say it every morning and every evening — not as a habit, but as a moment of standing before Allah with your full reality. It is not just seeking forgiveness; it is a complete renewal of your relationship with Him.</p>
       </div>
 
     </div>
@@ -689,9 +953,8 @@
 </main>
 
 <footer class="site-footer">
-  AlMaghrib Institute · Dikr Ramadan Series · Sh. Ammar AlShukry
+  AlMaghrib · Dhikr Ramadan Series · Sh. Ammar AlShukry
 </footer>
-
 
 <button class="pdf-btn" onclick="exportPDF()" title="Save as PDF">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

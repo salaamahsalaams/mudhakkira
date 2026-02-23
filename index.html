@@ -217,6 +217,7 @@
   .b-book    { color:#c9a84c; background:rgba(201,168,76,0.1); }
   .b-lecture { color:#a07cd4; background:rgba(160,124,212,0.1); }
   .b-podcast { color:#5abcbc; background:rgba(90,188,188,0.1); }
+  .b-game    { color:#9070d0; background:rgba(144,112,208,0.1); }
 
   .card-date { font-size:11px; color:rgba(240,236,227,0.18); margin-left:auto; }
 
@@ -377,7 +378,7 @@
       <p class="lib-label">Library</p>
       <h2 class="lib-heading">All Notes</h2>
     </div>
-    <span class="lib-count">4 notes · growing</span>
+    <span class="lib-count">5 notes · growing</span>
   </div>
 
   <div class="types r">
@@ -385,6 +386,7 @@
     <button class="type-pill">Video Series</button>
     <button class="type-pill">Books</button>
     <button class="type-pill">Lectures</button>
+    <button class="type-pill">Games</button>
   </div>
 
   <div class="grid">
@@ -408,7 +410,7 @@
         </div>
       </div>
       <div class="card-foot">
-        <span class="card-eps">5 episodes</span>
+        <span class="card-eps">6 episodes</span>
         <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
@@ -432,11 +434,35 @@
         </div>
       </div>
       <div class="card-foot">
-        <span class="card-eps">5 episodes</span>
+        <span class="card-eps">6 episodes</span>
         <span class="card-link">Read notes <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
       </div>
     </a>
 
+
+    <!-- Allah's Names Practice -->
+    <a href="allahs_names_practice.html" target="_blank" class="card r r2" data-type="game">
+      <div class="card-stripe s-purple"></div>
+      <div class="card-body">
+        <div class="card-top-row">
+          <span class="badge b-game">Interactive</span>
+          <span class="card-date">Ramadan 2026</span>
+        </div>
+        <h3 class="card-title">Allah's Names — Practice</h3>
+        <p class="card-by">Flashcards, Quiz &amp; Matching Game</p>
+        <p class="card-desc">Gamified practice for the Beautiful Names of Allah — flip flashcards, test yourself with quizzes, and play the matching game to lock in your knowledge.</p>
+        <div class="card-tags">
+          <span class="ctag">Flashcards</span>
+          <span class="ctag">Quiz</span>
+          <span class="ctag">Match</span>
+          <span class="ctag">Interactive</span>
+        </div>
+      </div>
+      <div class="card-foot">
+        <span class="card-eps">21 names · 3 modes</span>
+        <span class="card-link">Start practising <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
 
     <!-- Fiqh of Menstruation -->
     <a href="menstruation_tracker.html" target="_blank" class="card r r3" data-type="lecture">
@@ -538,7 +564,8 @@
           label === 'all' ||
           (label === 'video series' && type === 'series') ||
           (label === 'books'        && type === 'book')   ||
-          (label === 'lectures'     && type === 'lecture');
+          (label === 'lectures'     && type === 'lecture') ||
+          (label === 'games'        && type === 'game');
         card.style.display = visible ? '' : 'none';
       });
     });

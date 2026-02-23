@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allah's Names — Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep:    #1a1a2e;
+    --dark:    #16213e;
+    --mid:     #0f3460;
+    --accent:  #5a7fc1;
+    --light:   #c8d8f0;
+    --wash:    #eef2fb;
+    --gold:    #c9a84c;
+    --cream:   #faf9f6;
+    --ink:     #1a1a1a;
+    --ink-soft:#3d3d3d;
+    --ink-muted:#6b6b6b;
+    --rule:    #dde4f0;
+    --green:   #3a8c5c;
+    --red:     #c0392b;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--deep);
+    padding: 48px 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .header-inner { position: relative; max-width: 720px; margin: 0 auto; text-align: center; }
+  .header-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 300; color: #fff; line-height: 1.15; margin-bottom: 6px;
+  }
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 300; font-style: italic;
+    color: var(--light);
+  }
+
+  /* ── Main ── */
+  .main { max-width: 720px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex; gap: 6px; justify-content: center;
+    margin-bottom: 32px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 9px 22px; border-radius: 3px;
+    border: 1px solid var(--rule);
+    background: #fff; color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tab-btn.active {
+    background: var(--dark); color: #fff;
+    border-color: var(--dark);
+  }
+
+  .mode { display: none; }
+  .mode.active { display: block; }
+
+  /* ── Flashcard ── */
+  .fc-progress {
+    text-align: center; font-size: 12px; color: var(--ink-muted);
+    letter-spacing: 0.1em; margin-bottom: 16px;
+  }
+  .fc-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    min-height: 320px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    padding: 40px 32px;
+    text-align: center;
+    user-select: none;
+    position: relative;
+  }
+  .fc-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .fc-ep {
+    position: absolute; top: 16px; right: 16px;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 3px 10px; border: 1px solid var(--rule); border-radius: 2px;
+  }
+  .fc-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 64px; line-height: 1.6; color: var(--dark); direction: rtl;
+  }
+  .fc-hint {
+    font-size: 12px; color: var(--ink-muted); margin-top: 20px;
+    letter-spacing: 0.08em;
+  }
+  .fc-reveal { display: none; text-align: center; }
+  .fc-reveal.show { display: block; }
+  .fc-translit {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; color: var(--accent);
+    margin-top: 10px;
+  }
+  .fc-meaning {
+    font-size: 15px; color: var(--ink-soft); margin-top: 6px;
+  }
+  .fc-nav {
+    display: flex; gap: 10px; justify-content: center; margin-top: 20px;
+  }
+  .fc-btn {
+    padding: 10px 24px; border-radius: 3px;
+    border: 1px solid var(--rule); background: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    color: var(--ink-soft); cursor: pointer; transition: all 0.15s;
+  }
+  .fc-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .fc-btn.shuffle { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+  .fc-btn.shuffle:hover { background: rgba(201,168,76,0.06); }
+
+  /* ── Quiz ── */
+  .quiz-score {
+    text-align: center; font-size: 13px; color: var(--ink-muted);
+    margin-bottom: 16px; letter-spacing: 0.06em;
+  }
+  .quiz-card {
+    background: #fff; border: 1px solid var(--rule);
+    border-radius: 6px; padding: 40px 32px;
+    text-align: center;
+  }
+  .quiz-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 56px; line-height: 1.6; color: var(--dark); direction: rtl;
+    margin-bottom: 8px;
+  }
+  .quiz-prompt {
+    font-size: 14px; color: var(--ink-muted); margin-bottom: 24px;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; max-width: 420px; margin: 0 auto; }
+  .quiz-opt {
+    padding: 14px 20px; border-radius: 4px;
+    border: 1px solid var(--rule); background: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    color: var(--ink-soft); cursor: pointer; transition: all 0.15s;
+    text-align: left;
+  }
+  .quiz-opt:hover:not(.locked) { border-color: var(--accent); color: var(--accent); }
+  .quiz-opt.correct { border-color: var(--green); background: rgba(58,140,92,0.08); color: var(--green); }
+  .quiz-opt.wrong { border-color: var(--red); background: rgba(192,57,43,0.06); color: var(--red); }
+  .quiz-opt.locked { cursor: default; }
+  .quiz-next {
+    margin-top: 20px; padding: 10px 28px; border-radius: 3px;
+    border: none; background: var(--dark); color: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    cursor: pointer; display: none; transition: background 0.15s;
+  }
+  .quiz-next:hover { background: var(--mid); }
+  .quiz-next.show { display: inline-block; }
+
+  /* Quiz results */
+  .quiz-results {
+    text-align: center; padding: 40px 20px;
+    background: #fff; border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .quiz-results h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; color: var(--dark); margin-bottom: 8px;
+  }
+  .quiz-results p { font-size: 15px; color: var(--ink-soft); margin-bottom: 20px; }
+  .quiz-results .score-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 600; color: var(--accent); margin-bottom: 4px;
+  }
+
+  /* ── Match ── */
+  .match-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px; font-size: 13px; color: var(--ink-muted);
+  }
+  .match-timer { font-weight: 500; color: var(--accent); }
+  .match-board {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .match-col { display: flex; flex-direction: column; gap: 10px; }
+  .match-col-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule); margin-bottom: 2px;
+  }
+  .match-item {
+    padding: 14px 16px; border-radius: 4px;
+    border: 1px solid var(--rule); background: #fff;
+    font-size: 14px; color: var(--ink-soft);
+    cursor: pointer; transition: all 0.15s;
+    text-align: center; user-select: none;
+  }
+  .match-item:hover:not(.matched):not(.selected) { border-color: var(--accent); }
+  .match-item.selected { border-color: var(--accent); background: rgba(90,127,193,0.08); color: var(--accent); }
+  .match-item.matched { border-color: var(--green); background: rgba(58,140,92,0.08); color: var(--green); cursor: default; opacity: 0.7; }
+  .match-item.wrong-flash { border-color: var(--red); background: rgba(192,57,43,0.06); }
+  .match-item .mi-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+    font-size: 28px; line-height: 1.6; color: var(--dark); direction: rtl;
+  }
+  .match-item.matched .mi-arabic { color: var(--green); }
+
+  .match-results {
+    text-align: center; padding: 40px 20px;
+    background: #fff; border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .match-results h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400; color: var(--dark); margin-bottom: 8px;
+  }
+  .match-results p { font-size: 15px; color: var(--ink-soft); margin-bottom: 20px; }
+
+  /* Shared restart btn */
+  .restart-btn {
+    padding: 10px 28px; border-radius: 3px;
+    border: none; background: var(--dark); color: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .restart-btn:hover { background: var(--mid); }
+
+  /* ── Footer ── */
+  .site-footer {
+    text-align: center; padding: 40px 24px;
+    font-size: 12px; color: var(--ink-muted);
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 32px 16px 24px; }
+    .main { padding: 24px 16px 60px; }
+    .fc-arabic { font-size: 44px; }
+    .fc-card { min-height: 260px; padding: 32px 20px; }
+    .quiz-arabic { font-size: 40px; }
+    .quiz-card { padding: 28px 16px; }
+    .match-board { gap: 8px; }
+    .match-item { padding: 10px 8px; font-size: 13px; }
+    .match-item .mi-arabic { font-size: 22px; }
+    .tabs { gap: 4px; }
+    .tab-btn { padding: 8px 14px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-label">Yaqeen Institute · Ramadan 2026</p>
+    <h1 class="header-title">Allah's Names — Practice</h1>
+    <p class="header-subtitle">Flashcards, Quiz &amp; Matching Game</p>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="tabs">
+    <button class="tab-btn active" data-mode="flashcards">Flashcards</button>
+    <button class="tab-btn" data-mode="quiz">Quiz</button>
+    <button class="tab-btn" data-mode="match">Match</button>
+  </div>
+
+  <!-- ── Flashcards ── -->
+  <div class="mode active" id="flashcards">
+    <p class="fc-progress" id="fc-progress"></p>
+    <div class="fc-card" id="fc-card" onclick="fcFlip()">
+      <span class="fc-ep" id="fc-ep"></span>
+      <div class="fc-arabic" id="fc-arabic"></div>
+      <p class="fc-hint" id="fc-hint">Tap to reveal</p>
+      <div class="fc-reveal" id="fc-reveal">
+        <p class="fc-translit" id="fc-translit"></p>
+        <p class="fc-meaning" id="fc-meaning"></p>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="fc-btn" onclick="fcPrev()">Previous</button>
+      <button class="fc-btn shuffle" onclick="fcShuffle()">Shuffle</button>
+      <button class="fc-btn" onclick="fcNext()">Next</button>
+    </div>
+  </div>
+
+  <!-- ── Quiz ── -->
+  <div class="mode" id="quiz">
+    <p class="quiz-score" id="quiz-score"></p>
+    <div id="quiz-area"></div>
+  </div>
+
+  <!-- ── Match ── -->
+  <div class="mode" id="match">
+    <div class="match-bar">
+      <span id="match-progress"></span>
+      <span class="match-timer" id="match-timer">0:00</span>
+      <span id="match-streak"></span>
+    </div>
+    <div id="match-area"></div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  Yaqeen Institute · Allah's Names Series · Dr. Omar Suleiman · Ramadan 2026
+</footer>
+
+<script>
+const NAMES = [
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u062D\u0652\u0645\u064E\u0646\u064F", translit:"Ar-Ra\u1E25m\u0101n", meaning:"The Entirely Merciful", ep:1 },
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u062D\u0650\u064A\u0645\u064F", translit:"Ar-Ra\u1E25\u012Bm", meaning:"The Especially Merciful", ep:1 },
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u0621\u064F\u0648\u0641\u064F", translit:"Ar-Ra\u2019\u016Bf", meaning:"The Tenderly Compassionate", ep:1 },
+  { ar:"\u0627\u0644\u0652\u0648\u064E\u0627\u062D\u0650\u062F\u064F", translit:"Al-W\u0101\u1E25id", meaning:"The One", ep:2 },
+  { ar:"\u0627\u0644\u0652\u0623\u064E\u062D\u064E\u062F\u064F", translit:"Al-A\u1E25ad", meaning:"The Uniquely One", ep:2 },
+  { ar:"\u0627\u0644\u0652\u0648\u0650\u062A\u0652\u0631\u064F", translit:"Al-Witr", meaning:"The Odd", ep:2 },
+  { ar:"\u0627\u0644\u0652\u0647\u064E\u0627\u062F\u0650\u064A", translit:"Al-H\u0101d\u012B", meaning:"The Guide", ep:3 },
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u0634\u0650\u064A\u062F\u064F", translit:"Ar-Rash\u012Bd", meaning:"The Director of Right Guidance", ep:3 },
+  { ar:"\u0627\u0644\u0646\u064F\u0651\u0648\u0631\u064F", translit:"An-N\u016Br", meaning:"The Light", ep:3 },
+  { ar:"\u0627\u0644\u0652\u0645\u064F\u0628\u0650\u064A\u0646\u064F", translit:"Al-Mub\u012Bn", meaning:"The Self-Evident", ep:3 },
+  { ar:"\u0627\u0644\u0652\u0628\u064E\u0631\u064F\u0651", translit:"Al-Barr", meaning:"The Constant Source of All Good", ep:4 },
+  { ar:"\u0627\u0644\u0652\u0648\u064E\u0644\u0650\u064A\u064F\u0651", translit:"Al-W\u0101l\u012B", meaning:"The Protective Friend", ep:4 },
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u0641\u0650\u064A\u0642\u064F", translit:"Ar-Raf\u012Bq", meaning:"The Gentle Companion", ep:4 },
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u0628\u064F\u0651", translit:"Ar-Rabb", meaning:"The Lord Who Raises", ep:5 },
+  { ar:"\u0627\u0644\u0652\u0645\u064E\u0648\u0652\u0644\u064E\u0649", translit:"Al-Mawl\u0101", meaning:"The Protecting Master", ep:5 },
+  { ar:"\u0627\u0644\u0646\u064E\u0651\u0635\u0650\u064A\u0631\u064F", translit:"An-Na\u1E63\u012Br", meaning:"The Helper", ep:5 },
+  { ar:"\u0627\u0644\u0633\u064E\u0651\u064A\u0650\u0651\u062F\u064F", translit:"As-Sayyid", meaning:"The Master of All Masters", ep:5 },
+  { ar:"\u0627\u0644\u0652\u0645\u064E\u0644\u0650\u0643\u064F", translit:"Al-Malik", meaning:"The King", ep:6 },
+  { ar:"\u0627\u0644\u0652\u0645\u064E\u0627\u0644\u0650\u0643\u064F", translit:"Al-Maalik", meaning:"The Owner", ep:6 },
+  { ar:"\u0627\u0644\u0652\u0645\u064E\u0644\u0650\u064A\u0643\u064F", translit:"Al-Maleek", meaning:"The Sovereign", ep:6 },
+  { ar:"\u0627\u0644\u0652\u062C\u064E\u0644\u0650\u064A\u0644\u064F", translit:"Al-Jaleel", meaning:"The Majestic", ep:6 }
+];
+
+/* ── Utility ── */
+function shuffle(a) { const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];} return b; }
+
+/* ── Tab switching ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.mode').forEach(m => m.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.mode).classList.add('active');
+    if(btn.dataset.mode === 'quiz' && !quizStarted) startQuiz();
+    if(btn.dataset.mode === 'match' && !matchStarted) startMatch();
+  });
+});
+
+/* ═══════════════════ FLASHCARDS ═══════════════════ */
+let fcOrder = [...Array(NAMES.length).keys()];
+let fcIdx = 0;
+let fcFlipped = false;
+
+function fcRender() {
+  const n = NAMES[fcOrder[fcIdx]];
+  document.getElementById('fc-arabic').textContent = n.ar;
+  document.getElementById('fc-ep').textContent = 'Ep ' + String(n.ep).padStart(2,'0');
+  document.getElementById('fc-translit').textContent = n.translit;
+  document.getElementById('fc-meaning').textContent = n.meaning;
+  document.getElementById('fc-progress').textContent = (fcIdx+1) + ' of ' + NAMES.length;
+  fcFlipped = false;
+  document.getElementById('fc-reveal').classList.remove('show');
+  document.getElementById('fc-hint').style.display = '';
+}
+function fcFlip() {
+  if(!fcFlipped) {
+    fcFlipped = true;
+    document.getElementById('fc-reveal').classList.add('show');
+    document.getElementById('fc-hint').style.display = 'none';
+  }
+}
+function fcNext() { fcIdx = (fcIdx+1) % NAMES.length; fcRender(); }
+function fcPrev() { fcIdx = (fcIdx-1+NAMES.length) % NAMES.length; fcRender(); }
+function fcShuffle() { fcOrder = shuffle(fcOrder); fcIdx = 0; fcRender(); }
+fcRender();
+
+/* ═══════════════════ QUIZ ═══════════════════ */
+let quizStarted = false;
+let quizOrder, quizIdx, quizCorrect, quizTotal;
+
+function startQuiz() {
+  quizStarted = true;
+  quizOrder = shuffle([...Array(NAMES.length).keys()]);
+  quizIdx = 0; quizCorrect = 0; quizTotal = NAMES.length;
+  renderQuizQ();
+}
+
+function renderQuizQ() {
+  if(quizIdx >= quizTotal) { showQuizResults(); return; }
+  const ci = quizOrder[quizIdx];
+  const correct = NAMES[ci];
+  document.getElementById('quiz-score').textContent = 'Score: ' + quizCorrect + ' / ' + quizTotal + '  \u2014  Question ' + (quizIdx+1);
+
+  // pick 3 wrong answers
+  let pool = NAMES.filter((_,i) => i !== ci);
+  pool = shuffle(pool).slice(0,3);
+  let options = shuffle([correct, ...pool]);
+
+  let html = '<div class="quiz-card">';
+  html += '<div class="quiz-arabic">' + correct.ar + '</div>';
+  html += '<p class="quiz-prompt">What does this name mean?</p>';
+  html += '<div class="quiz-options">';
+  options.forEach((o,i) => {
+    html += '<button class="quiz-opt" data-idx="'+i+'" data-correct="'+(o===correct)+'" onclick="quizPick(this,\''+correct.meaning.replace(/'/g,"\\'")+'\')">' + o.meaning + '</button>';
+  });
+  html += '</div>';
+  html += '<button class="quiz-next" id="quiz-next-btn" onclick="quizNext()">Next</button>';
+  html += '</div>';
+  document.getElementById('quiz-area').innerHTML = html;
+}
+
+function quizPick(btn, correctMeaning) {
+  if(btn.classList.contains('locked')) return;
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.add('locked'));
+  if(btn.dataset.correct === 'true') {
+    btn.classList.add('correct');
+    quizCorrect++;
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.quiz-opt').forEach(b => {
+      if(b.dataset.correct === 'true') b.classList.add('correct');
+    });
+  }
+  document.getElementById('quiz-score').textContent = 'Score: ' + quizCorrect + ' / ' + quizTotal + '  \u2014  Question ' + (quizIdx+1);
+  document.getElementById('quiz-next-btn').classList.add('show');
+}
+
+function quizNext() { quizIdx++; renderQuizQ(); }
+
+function showQuizResults() {
+  const pct = Math.round(quizCorrect / quizTotal * 100);
+  let msg = pct === 100 ? 'Perfect score!' : pct >= 80 ? 'Great job!' : pct >= 50 ? 'Good effort \u2014 keep practising!' : 'Keep going \u2014 you\'ll get there!';
+  document.getElementById('quiz-score').textContent = '';
+  document.getElementById('quiz-area').innerHTML =
+    '<div class="quiz-results">' +
+    '<div class="score-big">' + quizCorrect + '/' + quizTotal + '</div>' +
+    '<h3>' + msg + '</h3>' +
+    '<p>You got ' + pct + '% correct</p>' +
+    '<button class="restart-btn" onclick="startQuiz()">Try Again</button>' +
+    '</div>';
+}
+
+/* ═══════════════════ MATCH ═══════════════════ */
+let matchStarted = false;
+let matchNames, matchRoundIdx, matchMatched, matchStreak, matchTimer, matchSeconds;
+let selectedLeft = null;
+const MATCH_SIZE = 5;
+
+function startMatch() {
+  matchStarted = true;
+  matchNames = shuffle([...Array(NAMES.length).keys()]);
+  matchRoundIdx = 0; matchMatched = 0; matchStreak = 0;
+  matchSeconds = 0;
+  clearInterval(matchTimer);
+  matchTimer = setInterval(() => {
+    matchSeconds++;
+    const m = Math.floor(matchSeconds/60);
+    const s = String(matchSeconds%60).padStart(2,'0');
+    document.getElementById('match-timer').textContent = m + ':' + s;
+  }, 1000);
+  renderMatchRound();
+}
+
+function renderMatchRound() {
+  const start = matchRoundIdx * MATCH_SIZE;
+  const slice = matchNames.slice(start, start + MATCH_SIZE);
+  if(slice.length === 0) { showMatchResults(); return; }
+
+  const leftOrder = shuffle([...slice]);
+  const rightOrder = shuffle([...slice]);
+  selectedLeft = null;
+
+  document.getElementById('match-progress').textContent = 'Matched: ' + matchMatched + '/' + NAMES.length;
+  document.getElementById('match-streak').textContent = 'Streak: ' + matchStreak;
+
+  let html = '<div class="match-board">';
+  html += '<div class="match-col"><p class="match-col-label">Arabic</p>';
+  leftOrder.forEach(idx => {
+    html += '<div class="match-item" data-idx="'+idx+'" data-side="left" onclick="matchSelect(this)"><span class="mi-arabic">' + NAMES[idx].ar + '</span></div>';
+  });
+  html += '</div>';
+  html += '<div class="match-col"><p class="match-col-label">Meaning</p>';
+  rightOrder.forEach(idx => {
+    html += '<div class="match-item" data-idx="'+idx+'" data-side="right" onclick="matchSelect(this)">' + NAMES[idx].meaning + '</div>';
+  });
+  html += '</div></div>';
+  document.getElementById('match-area').innerHTML = html;
+}
+
+function matchSelect(el) {
+  if(el.classList.contains('matched')) return;
+  const side = el.dataset.side;
+  const idx = el.dataset.idx;
+
+  if(side === 'left') {
+    document.querySelectorAll('.match-item[data-side="left"]').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedLeft = idx;
+  } else if(side === 'right' && selectedLeft !== null) {
+    if(idx === selectedLeft) {
+      // correct
+      document.querySelectorAll('.match-item[data-idx="'+idx+'"]').forEach(e => {
+        e.classList.remove('selected');
+        e.classList.add('matched');
+      });
+      matchMatched++; matchStreak++;
+      selectedLeft = null;
+      document.getElementById('match-progress').textContent = 'Matched: ' + matchMatched + '/' + NAMES.length;
+      document.getElementById('match-streak').textContent = 'Streak: ' + matchStreak;
+
+      // check if round complete
+      const unmatched = document.querySelectorAll('.match-item[data-side="left"]:not(.matched)');
+      if(unmatched.length === 0) {
+        matchRoundIdx++;
+        setTimeout(renderMatchRound, 600);
+      }
+    } else {
+      // wrong
+      matchStreak = 0;
+      document.getElementById('match-streak').textContent = 'Streak: 0';
+      el.classList.add('wrong-flash');
+      const leftEl = document.querySelector('.match-item[data-side="left"].selected');
+      if(leftEl) leftEl.classList.add('wrong-flash');
+      setTimeout(() => {
+        el.classList.remove('wrong-flash');
+        if(leftEl) { leftEl.classList.remove('wrong-flash'); leftEl.classList.remove('selected'); }
+        selectedLeft = null;
+      }, 500);
+    }
+  }
+}
+
+function showMatchResults() {
+  clearInterval(matchTimer);
+  const m = Math.floor(matchSeconds/60);
+  const s = String(matchSeconds%60).padStart(2,'0');
+  document.getElementById('match-progress').textContent = '';
+  document.getElementById('match-streak').textContent = '';
+  document.getElementById('match-area').innerHTML =
+    '<div class="match-results">' +
+    '<h3>All matched!</h3>' +
+    '<p>You matched all ' + NAMES.length + ' names in ' + m + ':' + s + '</p>' +
+    '<button class="restart-btn" onclick="startMatch()">Play Again</button>' +
+    '</div>';
+}
+</script>
+
+</body>
+</html>

@@ -507,6 +507,63 @@
   .ep-watch-link:hover { background: rgba(201,168,76,0.22); }
   @media print { .ep-watch-link { display: none !important; } }
   @media (max-width: 640px) { .ep-watch-link { display: none; } }
+
+  /* ── Quick Links Nav ── */
+  .quick-nav {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 48px 0;
+  }
+  .quick-nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+  }
+  .quick-nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+  }
+  .quick-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 400;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .quick-nav-link:hover {
+    border-color: var(--accent);
+    background: var(--wash);
+    color: var(--ink);
+  }
+  .quick-nav-ep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .quick-nav-title {
+    font-size: 12px;
+  }
+  @media print { .quick-nav { display: none !important; } }
+  @media (max-width: 640px) {
+    .quick-nav { padding: 20px 16px 0; }
+    .quick-nav-link { padding: 6px 12px; font-size: 11px; }
+    .quick-nav-title { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -534,10 +591,23 @@
   
 </header>
 
+<nav class="quick-nav">
+  <p class="quick-nav-label">Quick Links</p>
+  <ul class="quick-nav-list">
+    <li><a class="quick-nav-link" href="#ep1"><span class="quick-nav-ep">01</span><span class="quick-nav-title">How Merciful is the Most Merciful?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep2"><span class="quick-nav-ep">02</span><span class="quick-nav-title">Who Owns Your Heart?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep3"><span class="quick-nav-ep">03</span><span class="quick-nav-title">Who Shows You the Way?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep4"><span class="quick-nav-ep">04</span><span class="quick-nav-title">Who Never Leaves You?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep5"><span class="quick-nav-ep">05</span><span class="quick-nav-title">Who Do You Belong To?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep6"><span class="quick-nav-ep">06</span><span class="quick-nav-title">Who is the King?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep7"><span class="quick-nav-ep">07</span><span class="quick-nav-title">Who Made You?</span></a></li>
+  </ul>
+</nav>
+
 <main class="main">
 
   <!-- ══════════════════════════ EPISODE 1 ══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep1">
     <div class="ep-banner">
       <span class="ep-number">Ep 01</span>
       <h2 class="ep-title">How Merciful is the Most Merciful?</h2>
@@ -653,7 +723,7 @@
   </article>
 
   <!-- ═══════════════════════════ EPISODE 2 ═══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep2">
     <div class="ep-banner">
       <span class="ep-number">Ep 02</span>
       <h2 class="ep-title">Who Owns Your Heart?</h2>
@@ -769,7 +839,7 @@
   </article>
 
   <!-- ═══════════════════════════ EPISODE 3 ═══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep3">
     <div class="ep-banner">
       <span class="ep-number">Ep 03</span>
       <h2 class="ep-title">Who Shows You the Way?</h2>
@@ -899,7 +969,7 @@
   </article>
 
   <!-- ═══════════════════════════ EPISODE 4 ═══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep4">
     <div class="ep-banner">
       <span class="ep-number">Ep 04</span>
       <h2 class="ep-title">Who Never Leaves You?</h2>
@@ -1015,7 +1085,7 @@
   </article>
 
   <!-- ═══════════════════════════ EPISODE 5 ═══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep5">
     <div class="ep-banner">
       <span class="ep-number">Ep 05</span>
       <h2 class="ep-title">Who Do You Belong To?</h2>
@@ -1145,7 +1215,7 @@
   </article>
 
   <!-- ═══════════════════════════ EPISODE 6 ═══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep6">
     <div class="ep-banner">
       <span class="ep-number">Ep 06</span>
       <h2 class="ep-title">Who is the King?</h2>
@@ -1275,7 +1345,7 @@
   </article>
 
   <!-- ═══════════════════════════ EPISODE 7 ═══════════════════════════ -->
-  <article class="episode">
+  <article class="episode" id="ep7">
     <div class="ep-banner">
       <span class="ep-number">Ep 07</span>
       <h2 class="ep-title">Who Made You?</h2>

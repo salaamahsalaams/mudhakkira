@@ -32,14 +32,14 @@
     line-height: 1.7;
   }
 
-  /* ── er ── */
-  .site-er {
+  /* ── header ── */
+  .site-header {
     background: var(--green-deep);
     padding: 64px 48px 48px;
     position: relative;
     overflow: hidden;
   }
-  .site-er::before {
+  .site-header::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -47,14 +47,14 @@
       radial-gradient(ellipse 60% 80% at 80% 50%, rgba(74,140,100,0.18) 0%, transparent 70%),
       radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
   }
-  .site-er::after {
+  .site-header::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
-  .er-inner { position: relative; max-width: 900px; margin: 0 auto; }
+  .header-inner { position: relative; max-width: 900px; margin: 0 auto; }
   .er-label {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
@@ -64,7 +64,7 @@
     color: var(--gold);
     margin-bottom: 20px;
   }
-  .er-title {
+  .header-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(40px, 6vw, 64px);
     font-weight: 300;
@@ -72,7 +72,7 @@
     line-height: 1.1;
     margin-bottom: 8px;
   }
-  .er-subtitle {
+  .header-subtitle {
     font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
     font-weight: 300;
@@ -80,7 +80,7 @@
     color: var(--green-light);
     margin-bottom: 32px;
   }
-  .er-meta {
+  .header-meta {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
@@ -415,14 +415,14 @@
     .pdf-btn { display: none !important; }
     .ep-watch-link { display: none !important; }
 
-    .site-er {
+    .site-header {
       padding: 28px 28px 22px !important;
       background: #0f2318 !important;
       -webkit-print-color-adjust: exact !important;
     }
 
-    .er-title { font-size: 36pt !important; }
-    .er-subtitle { font-size: 14pt !important; }
+    .header-title { font-size: 36pt !important; }
+    .header-subtitle { font-size: 14pt !important; }
 
     .main { padding: 0 0 20px; max-width: 100%; }
 
@@ -455,10 +455,10 @@
   }
 
   @media (max-width: 640px) {
-    .site-er { padding: 32px 16px 28px; }
-    .er-title { font-size: 32px; }
-    .er-subtitle { font-size: 16px; }
-    .er-meta { gap: 8px; }
+    .site-header { padding: 32px 16px 28px; }
+    .header-title { font-size: 32px; }
+    .header-subtitle { font-size: 16px; }
+    .header-meta { gap: 8px; }
     .main { padding: 0 16px 60px; }
 
     .episode { margin-top: 32px; }
@@ -486,10 +486,10 @@
     }
   }
 </style>
-</>
+</header>
 <body>
 
-<er class="site-header">
+<header class="site-header">
   <div class="header-inner">
     <p class="header-label">AlMaghrib · YouTube · Ramadan Series</p>
     <h1 class="header-title">Dhikr Ramadan Series</h1>

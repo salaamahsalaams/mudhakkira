@@ -414,10 +414,9 @@
 
     .episode { margin-top: 20px; }
 
-    .ep-banner { background: #16213e !important; page-break-after: avoid; break-after: avoid; }
-    .ep-body { page-break-before: avoid; break-before: avoid; }
-
-    .section { break-inside: avoid; page-break-inside: avoid; }
+    .ep-banner { background: #16213e !important; break-after: avoid; }
+    body.pdf-blocks .section { break-inside: avoid; page-break-inside: avoid; }
+    body.pdf-blocks .ep-body { break-before: avoid; page-break-before: avoid; }
 
     .takeaway {
       background: #1a1a2e !important;
@@ -466,9 +465,31 @@
     .name-arabic { font-size: 36px; }
     .name-block { padding: 18px 16px 14px; }
 
-    /* Tables scroll */
-    .points-table, .compare-table { min-width: 500px; }
-    .compare-table .td-name { font-size: 22px; }
+    /* Tables — stacked cards on mobile */
+    .compare-table, .points-table { min-width: 0; }
+    .compare-table thead, .points-table thead { display: none; }
+    .compare-table, .compare-table tbody,
+    .points-table, .points-table tbody { display: block; }
+    .compare-table tr, .points-table tr {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .compare-table tr:last-child, .points-table tr:last-child { border-bottom: none; }
+    .compare-table td, .points-table td {
+      display: block;
+      padding: 0;
+      border: none;
+      background: none !important;
+      width: auto !important;
+    }
+    .compare-table .td-name { font-size: 24px; margin-bottom: 2px; }
+    .compare-table .td-translit { margin-bottom: 8px; }
+    .points-table .td-label {
+      white-space: normal;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
 
     /* Dua quotes in takeaway */
     .dua-quote .dua-ar { font-size: 18px; }
@@ -506,7 +527,7 @@
   }
   .ep-watch-link:hover { background: rgba(201,168,76,0.22); }
   @media print { .ep-watch-link { display: none !important; } }
-  @media (max-width: 640px) { .ep-watch-link { display: none; } }
+  @media (max-width: 640px) { .ep-watch-link { font-size: 10px; padding: 5px 12px; } }
 
   /* ── Quick Links Nav ── */
   .quick-nav {
@@ -601,6 +622,7 @@
     <li><a class="quick-nav-link" href="#ep5"><span class="quick-nav-ep">05</span><span class="quick-nav-title">Who Do You Belong To?</span></a></li>
     <li><a class="quick-nav-link" href="#ep6"><span class="quick-nav-ep">06</span><span class="quick-nav-title">Who is the King?</span></a></li>
     <li><a class="quick-nav-link" href="#ep7"><span class="quick-nav-ep">07</span><span class="quick-nav-title">Who Made You?</span></a></li>
+    <li><a class="quick-nav-link" href="#ep8"><span class="quick-nav-ep">08</span><span class="quick-nav-title">What Makes You Whole?</span></a></li>
   </ul>
 </nav>
 
@@ -1474,13 +1496,175 @@
     </div>
   </article>
 
+  <!-- ═══════════════════════════ EPISODE 8 ═══════════════════════════ -->
+  <article class="episode" id="ep8">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 08</span>
+      <h2 class="ep-title">What Makes You Whole?</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=j7_G2yP7-ew" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Names Covered</p>
+          <p class="info-value">Aṣ-Ṣamad · Al-Ḥaqq · Al-Wāsiʿ</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">From emptiness to truth to vastness — only He can fill what nothing else can</p>
+        </div>
+      </div>
+
+      <!-- Names -->
+      <div class="section">
+        <p class="section-label">The Names</p>
+        <div class="names-row">
+          <div class="name-block">
+            <span class="name-arabic">الصَّمَدُ</span>
+            <p class="name-transliteration">Aṣ-Ṣamad</p>
+            <p class="name-meaning">The Self-Sufficient</p>
+          </div>
+          <div class="name-block">
+            <span class="name-arabic">الْحَقُّ</span>
+            <p class="name-transliteration">Al-Ḥaqq</p>
+            <p class="name-meaning">The Truth</p>
+          </div>
+          <div class="name-block">
+            <span class="name-arabic">الْوَاسِعُ</span>
+            <p class="name-transliteration">Al-Wāsiʿ</p>
+            <p class="name-meaning">The Vast</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background -->
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">Allah lets you feel empty and dissatisfied with everything else so that you don't depend too much on those things. Every void you feel is a signal from your soul pointing you back to the only One who can truly fill it.</p>
+      </div>
+
+      <!-- Distinguishing the Three Names -->
+      <div class="section">
+        <p class="section-label">Distinguishing the Three Names</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="compare-table">
+          <thead>
+            <tr><th style="width:130px;">Name</th><th style="width:150px;">Transliteration</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-name">الصَّمَدُ</td>
+              <td class="td-translit">Aṣ-Ṣamad</td>
+              <td>The one who is whole, not hollow — completely self-sufficient and free of all need. He has no gaps, no parts that can break apart. He is the perfect refuge and the only one who can make you feel whole, because He alone is entirely free of need.</td>
+            </tr>
+            <tr>
+              <td class="td-name">الْحَقُّ</td>
+              <td class="td-translit">Al-Ḥaqq</td>
+              <td>Not just truthful, but truth itself — in His being, His promise, His word, and His meeting. Everything connected to Him has lasting value; everything detached is hollow and temporary. Each truth He reveals unlocks the next, building a roadmap of purpose.</td>
+            </tr>
+            <tr>
+              <td class="td-name">الْوَاسِعُ</td>
+              <td class="td-translit">Al-Wāsiʿ</td>
+              <td>Vast in every way with no scarcity. His capacity is infinite — no matter how many call on Him, He hears every voice. He never runs out of mercy, patience, or provision. He is the divine expander who opens your knowledge, capacity, and blessings when you walk toward Him.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Key Points -->
+      <div class="section">
+        <p class="section-label">Key Points</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:220px;">Point</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">You were designed to feel empty without Him</td>
+              <td>Sins make you feel miserable and worldly pursuits leave you unfulfilled — by design. A job gives income but not meaning. A relationship gives companionship but not completion. Fame gives attention but not validation. Every created thing has a limit, and the moment you reach it, the void returns.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Truth is a roadmap — each truth unlocks the next</td>
+              <td>Once you know Allah is real, you trust His promise. Then His word is true, then meeting Him is true, then paradise and hellfire are true, then the prophets are true. The reward of a good deed is another good deed and more clarity. But the punishment of sin is spiritual claustrophobia — the path narrows and you feel trapped.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Restriction for His sake opens you to His vastness</td>
+              <td>Praying Fajr is hard. Lowering your gaze is tough. Fasting on a hot day is exhausting. But that very restraint opens a world you could not otherwise access. People suffocate in mansions, choked by wealth, trapped by their liberating sins. Every sacrifice for Allah has a higher yield — every restriction is temporary and replaced by a promised permanent reward.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway &amp; Du'ā</p>
+        <p>Return to Aṣ-Ṣamad for wholeness when you fall apart, to Al-Ḥaqq for meaning when you lose your way, and to Al-Wāsiʿ for space when the world feels small.</p>
+        <div class="dua-quote">
+          <p class="dua-ar">يَا صَمَدُ</p>
+          <p>The One who needs nothing while everything needs You. Make me whole by depending only on You. Fill the hollowness inside of me until no desire within me competes with Your glory.</p>
+          <p class="dua-ar" style="margin-top:12px;">يَا حَقُّ</p>
+          <p>Make Your truth the anchor of my heart and my guiding path to Your light. Let every lie I chase collapse before Your reality. And every truth I seek, lead me to Your next promise. Keep me grounded in what endures and turn my eyes away from what deceives.</p>
+          <p class="dua-ar" style="margin-top:12px;">يَا وَاسِعُ</p>
+          <p>Expand my heart to hold more gratitude, my patience to endure with more grace, and my vision to see beyond my limits. Let me find expanse in Your vastness when the world around me starts to feel small.</p>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
 </main>
 
 <footer class="site-footer">
   Yaqeen Institute · Allah's Names Series · Dr. Omar Suleiman · Ramadan 2026
 </footer>
 
-<button class="pdf-btn" onclick="exportPDF()" title="Save as PDF">
+<style>
+  .pdf-options {
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    min-width: 220px;
+  }
+  .pdf-options.active { display: block; }
+  .pdf-option {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .pdf-option + .pdf-option { margin-top: 6px; }
+  .pdf-option:hover { background: #f5f5f5; }
+  .pdf-option-title { font-weight: 500; display: block; }
+  .pdf-option-desc { font-size: 11px; color: #6b6b6b; margin-top: 2px; display: block; }
+  @media print { .pdf-options { display: none !important; } }
+</style>
+
+<div class="pdf-options" id="pdfOptions">
+  <button class="pdf-option" onclick="exportPDF('flow')">
+    <span class="pdf-option-title">Continuous Flow</span>
+    <span class="pdf-option-desc">Content breaks naturally across pages</span>
+  </button>
+  <button class="pdf-option" onclick="exportPDF('blocks')">
+    <span class="pdf-option-title">Keep Sections Together</span>
+    <span class="pdf-option-desc">Sections stay intact — may leave white space</span>
+  </button>
+</div>
+
+<button class="pdf-btn" onclick="togglePdfOptions()" title="Save as PDF">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
     <polyline points="14 2 14 8 20 8"/>
@@ -1491,26 +1675,21 @@
 </button>
 
 <script>
-  function exportPDF() {
-    document.querySelectorAll('.episode, .episode *').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.style.animation = 'none';
-      el.style.animationDelay = '0s';
-      el.style.transition = 'none';
-    });
-    setTimeout(() => {
-      window.print();
-      setTimeout(() => {
-        document.querySelectorAll('.episode, .episode *').forEach(el => {
-          el.style.opacity = '';
-          el.style.transform = '';
-          el.style.animation = '';
-          el.style.animationDelay = '';
-          el.style.transition = '';
-        });
-      }, 500);
-    }, 150);
+  function togglePdfOptions() {
+    document.getElementById('pdfOptions').classList.toggle('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.pdf-btn') && !e.target.closest('.pdf-options')) {
+      document.getElementById('pdfOptions').classList.remove('active');
+    }
+  });
+
+  function exportPDF(mode) {
+    document.getElementById('pdfOptions').classList.remove('active');
+    if (mode === 'blocks') document.body.classList.add('pdf-blocks');
+    window.print();
+    document.body.classList.remove('pdf-blocks');
   }
 </script>
 

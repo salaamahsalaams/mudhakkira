@@ -322,10 +322,9 @@
 
     .episode { margin-top: 20px; }
 
-    .ep-banner { background: #2e1420 !important; page-break-after: avoid; break-after: avoid; }
-    .ep-body { page-break-before: avoid; break-before: avoid; }
-
-    .section { break-inside: avoid; page-break-inside: avoid; }
+    .ep-banner { background: #2e1420 !important; break-after: avoid; }
+    body.pdf-blocks .section { break-inside: avoid; page-break-inside: avoid; }
+    body.pdf-blocks .ep-body { break-before: avoid; page-break-before: avoid; }
 
     .takeaway {
       background: #1e0c14 !important;
@@ -349,14 +348,35 @@
     .episode { margin-top: 32px; }
     .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
     .ep-title { font-size: 20px; }
-    .ep-watch-link { display: none; }
+    .ep-watch-link { font-size: 10px; padding: 5px 12px; }
 
     .info-strip { grid-template-columns: 1fr; }
     .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
 
     .section { padding: 16px; }
 
-    .points-table { min-width: 480px; }
+    /* Tables — stacked cards on mobile */
+    .points-table { min-width: 0; }
+    .points-table thead { display: none; }
+    .points-table, .points-table tbody { display: block; }
+    .points-table tr {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .points-table tr:last-child { border-bottom: none; }
+    .points-table td {
+      display: block;
+      padding: 0;
+      border: none;
+      background: none !important;
+      width: auto !important;
+    }
+    .points-table .td-label {
+      white-space: normal;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
 
     .site-footer { padding: 28px 16px; }
 
@@ -620,7 +640,53 @@
   Fiqh of Ṭahārah · Menstruation &amp; Postnatal Bleeding · YouTube
 </footer>
 
-<button class="pdf-btn" onclick="exportPDF()" title="Save as PDF">
+<style>
+  .pdf-options {
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    min-width: 220px;
+  }
+  .pdf-options.active { display: block; }
+  .pdf-option {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .pdf-option + .pdf-option { margin-top: 6px; }
+  .pdf-option:hover { background: #f5f5f5; }
+  .pdf-option-title { font-weight: 500; display: block; }
+  .pdf-option-desc { font-size: 11px; color: #6b6b6b; margin-top: 2px; display: block; }
+  @media print { .pdf-options { display: none !important; } }
+</style>
+
+<div class="pdf-options" id="pdfOptions">
+  <button class="pdf-option" onclick="exportPDF('flow')">
+    <span class="pdf-option-title">Continuous Flow</span>
+    <span class="pdf-option-desc">Content breaks naturally across pages</span>
+  </button>
+  <button class="pdf-option" onclick="exportPDF('blocks')">
+    <span class="pdf-option-title">Keep Sections Together</span>
+    <span class="pdf-option-desc">Sections stay intact — may leave white space</span>
+  </button>
+</div>
+
+<button class="pdf-btn" onclick="togglePdfOptions()" title="Save as PDF">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
     <polyline points="14 2 14 8 20 8"/>
@@ -631,26 +697,21 @@
 </button>
 
 <script>
-  function exportPDF() {
-    document.querySelectorAll('.episode, .episode *').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.style.animation = 'none';
-      el.style.animationDelay = '0s';
-      el.style.transition = 'none';
-    });
-    setTimeout(() => {
-      window.print();
-      setTimeout(() => {
-        document.querySelectorAll('.episode, .episode *').forEach(el => {
-          el.style.opacity = '';
-          el.style.transform = '';
-          el.style.animation = '';
-          el.style.animationDelay = '';
-          el.style.transition = '';
-        });
-      }, 500);
-    }, 150);
+  function togglePdfOptions() {
+    document.getElementById('pdfOptions').classList.toggle('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.pdf-btn') && !e.target.closest('.pdf-options')) {
+      document.getElementById('pdfOptions').classList.remove('active');
+    }
+  });
+
+  function exportPDF(mode) {
+    document.getElementById('pdfOptions').classList.remove('active');
+    if (mode === 'blocks') document.body.classList.add('pdf-blocks');
+    window.print();
+    document.body.classList.remove('pdf-blocks');
   }
 </script>
 

@@ -428,10 +428,9 @@
 
     .episode { margin-top: 20px; }
 
-    .ep-banner { background: #1a3828 !important; page-break-after: avoid; break-after: avoid; }
-    .ep-body { page-break-before: avoid; break-before: avoid; }
-
-    .section { break-inside: avoid; page-break-inside: avoid; }
+    .ep-banner { background: #1a3828 !important; break-after: avoid; }
+    body.pdf-blocks .section { break-inside: avoid; page-break-inside: avoid; }
+    body.pdf-blocks .ep-body { break-before: avoid; page-break-before: avoid; }
 
     .takeaway {
       background: #0f2318 !important;
@@ -464,7 +463,7 @@
     .episode { margin-top: 32px; }
     .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
     .ep-title { font-size: 20px; }
-    .ep-watch-link { display: none; }
+    .ep-watch-link { font-size: 10px; padding: 5px 12px; }
 
     .info-strip { grid-template-columns: 1fr; }
     .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
@@ -475,8 +474,31 @@
     .dua-arabic.long { font-size: 22px; }
     .dua-block { padding: 20px 16px 16px; }
 
-    .points-table, .dua-table { min-width: 480px; }
-    .points-table .td-label, .dua-table .td-arabic { white-space: normal; }
+    /* Tables — stacked cards on mobile */
+    .points-table, .dua-table { min-width: 0; }
+    .points-table thead, .dua-table thead { display: none; }
+    .points-table, .points-table tbody,
+    .dua-table, .dua-table tbody { display: block; }
+    .points-table tr, .dua-table tr {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .points-table tr:last-child, .dua-table tr:last-child { border-bottom: none; }
+    .points-table td, .dua-table td {
+      display: block;
+      padding: 0;
+      border: none;
+      background: none !important;
+      width: auto !important;
+    }
+    .points-table .td-label {
+      white-space: normal;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .dua-table .td-arabic { margin-bottom: 4px; }
+    .dua-table .td-translit { margin-bottom: 8px; }
 
     .site-footer { padding: 28px 16px; }
 
@@ -543,7 +565,7 @@
     .quick-nav-title { display: none; }
   }
 </style>
-</header>
+</head>
 <body>
 
 <header class="site-header">
@@ -580,6 +602,7 @@
     <li><a class="quick-nav-link" href="#ep5"><span class="quick-nav-ep">05</span><span class="quick-nav-title">The Master of Seeking Forgiveness</span></a></li>
     <li><a class="quick-nav-link" href="#ep6"><span class="quick-nav-ep">06</span><span class="quick-nav-title">This Du'ā Feeds Your Soul When It's Starving</span></a></li>
     <li><a class="quick-nav-link" href="#ep7"><span class="quick-nav-ep">07</span><span class="quick-nav-title">Don't Leave Home Without This</span></a></li>
+    <li><a class="quick-nav-link" href="#ep8"><span class="quick-nav-ep">08</span><span class="quick-nav-title">The Perfect Way to Enter Salah</span></a></li>
   </ul>
 </nav>
 
@@ -1187,13 +1210,129 @@
     </div>
   </article>
 
+  <!-- ═══════════════════════════ EPISODE 8 ═══════════════════════════ -->
+  <article class="episode" id="ep8">
+    <div class="ep-banner">
+      <span class="ep-number">Ep 08</span>
+      <h2 class="ep-title">The Perfect Way to Enter Salah</h2>
+      <a class="ep-watch-link" href="https://www.youtube.com/watch?v=uvEXz_VNpZE" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Dhikr</p>
+          <p class="info-value">Du'ā al-Istiftāḥ — Opening supplication of Salāh</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">Entering prayer cleansed &amp; conscious of your need for Allah's mercy</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-label">The Dhikr</p>
+        <div class="dua-block">
+          <span class="dua-arabic long">اللَّهُمَّ بَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ ۞ اللَّهُمَّ نَقِّنِي مِنْ خَطَايَايَ كَمَا يُنَقَّى الثَّوْبُ الْأَبْيَضُ مِنَ الدَّنَسِ ۞ اللَّهُمَّ اغْسِلْنِي مِنْ خَطَايَايَ بِالثَّلْجِ وَالْمَاءِ وَالْبَرَدِ</span>
+          <p class="dua-transliteration">Allāhumma bāʿid baynī wa bayna khaṭāyāya kamā bāʿadta bayna al-mashriqi wa al-maghrib. Allāhumma naqqinī min khaṭāyāya kamā yunaqqā al-thawbu al-abyaḍu min al-danas. Allāhumma ghsilnī min khaṭāyāya bi al-thalji wa al-mā'i wa al-barad.</p>
+          <p class="dua-meaning">O Allah, distance me from my sins as You have distanced the East from the West. O Allah, cleanse me of my sins as a white garment is cleansed of filth. O Allah, wash me of my sins with snow, water, and hail.</p>
+        </div>
+        <p class="body-text" style="margin-top:14px; font-size:13px; color:var(--ink-muted);">
+          <em>Source:</em> Narrated by Abū Hurayrah (RA), reported by al-Bukhārī and Muslim.
+        </p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Background</p>
+        <p class="body-text">The Prophet ﷺ would pause briefly after the opening takbīr and before reciting al-Fātiḥah. Abū Hurayrah noticed his beard moving slightly during this pause and asked what he was saying — so the Prophet ﷺ taught him this du'ā. It is called du'ā al-istiftāḥ, the opening supplication of prayer.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-label">Breaking Down the Du'ā</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead>
+            <tr><th style="width:200px;">Point</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Distance is sought from both sides</td>
+              <td>The word bāʿid comes in a form indicating intensity and mutuality — you are asking Allah to distance you from your sins and your sins from you. No proximity from either direction. The level of separation you request is the distance between the east and the west, the furthest imaginable, with no possibility of overlap.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Three requests that cover every kind of cleansing</td>
+              <td>First, distance me from my sins — remove them far away. Second, purify me — like stains removed from a white garment, where even the smallest mark is visible. Third, wash me with snow, water, and hail — because the scholars say sins carry heat and stickiness, causing stress and anxiety, and you are asking Allah to cool your heart and strip away every trace.</td>
+            </tr>
+            <tr>
+              <td class="td-label">This du'ā is designed for the one who feels unworthy to pray</td>
+              <td>You say this before al-Fātiḥah, before bowing, before prostration. Many people feel so ashamed of their sins that they cannot bring themselves to stand before Allah. This du'ā becomes the entrance — it teaches you to say: whatever sins I carry, however broken I am, distance me from them and cleanse me. It sets the tone for your entire prayer and helps your heart stay present.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>This du'ā is said in the brief pause between the opening takbīr and al-Fātiḥah. Learn it, memorise it, and make it your habit the way it was his ﷺ habit. When you start your prayer by asking to be cleansed, you remind yourself why you are standing there — a sinful servant in need of a merciful Lord.</p>
+      </div>
+
+    </div>
+  </article>
+
 </main>
 
 <footer class="site-footer">
   AlMaghrib · Dhikr Ramadan Series · Sh. Ammar AlShukry
 </footer>
 
-<button class="pdf-btn" onclick="exportPDF()" title="Save as PDF">
+<style>
+  .pdf-options {
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    min-width: 220px;
+  }
+  .pdf-options.active { display: block; }
+  .pdf-option {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .pdf-option + .pdf-option { margin-top: 6px; }
+  .pdf-option:hover { background: #f5f5f5; }
+  .pdf-option-title { font-weight: 500; display: block; }
+  .pdf-option-desc { font-size: 11px; color: #6b6b6b; margin-top: 2px; display: block; }
+  @media print { .pdf-options { display: none !important; } }
+</style>
+
+<div class="pdf-options" id="pdfOptions">
+  <button class="pdf-option" onclick="exportPDF('flow')">
+    <span class="pdf-option-title">Continuous Flow</span>
+    <span class="pdf-option-desc">Content breaks naturally across pages</span>
+  </button>
+  <button class="pdf-option" onclick="exportPDF('blocks')">
+    <span class="pdf-option-title">Keep Sections Together</span>
+    <span class="pdf-option-desc">Sections stay intact — may leave white space</span>
+  </button>
+</div>
+
+<button class="pdf-btn" onclick="togglePdfOptions()" title="Save as PDF">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
     <polyline points="14 2 14 8 20 8"/>
@@ -1204,26 +1343,21 @@
 </button>
 
 <script>
-  function exportPDF() {
-    document.querySelectorAll('.episode, .episode *').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.style.animation = 'none';
-      el.style.animationDelay = '0s';
-      el.style.transition = 'none';
-    });
-    setTimeout(() => {
-      window.print();
-      setTimeout(() => {
-        document.querySelectorAll('.episode, .episode *').forEach(el => {
-          el.style.opacity = '';
-          el.style.transform = '';
-          el.style.animation = '';
-          el.style.animationDelay = '';
-          el.style.transition = '';
-        });
-      }, 500);
-    }, 150);
+  function togglePdfOptions() {
+    document.getElementById('pdfOptions').classList.toggle('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.pdf-btn') && !e.target.closest('.pdf-options')) {
+      document.getElementById('pdfOptions').classList.remove('active');
+    }
+  });
+
+  function exportPDF(mode) {
+    document.getElementById('pdfOptions').classList.remove('active');
+    if (mode === 'blocks') document.body.classList.add('pdf-blocks');
+    window.print();
+    document.body.classList.remove('pdf-blocks');
   }
 </script>
 

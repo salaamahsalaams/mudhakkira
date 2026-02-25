@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taste the Sweetness of Salah — Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-deep:   #1a0f24;
+    --purple-dark:   #2a1840;
+    --purple-mid:    #5a2e80;
+    --purple-accent: #8050c0;
+    --purple-light:  #d0b8e8;
+    --purple-wash:   #f5f0fb;
+    --gold:          #c9a84c;
+    --cream:         #faf8f3;
+    --ink:           #1a1a1a;
+    --ink-soft:      #3d3d3d;
+    --ink-muted:     #6b6b6b;
+    --rule:          #dcd0e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--purple-deep);
+    padding: 64px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(128,80,192,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .header-inner { position: relative; max-width: 900px; margin: 0 auto; }
+  .header-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6vw, 62px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--purple-light);
+    margin-bottom: 32px;
+  }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .meta-pill {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    padding: 4px 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Quick Links Nav ── */
+  .quick-nav {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 48px 0;
+  }
+  .quick-nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+  }
+  .quick-nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+  }
+  .quick-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 12px;
+    font-weight: 400;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .quick-nav-link:hover {
+    border-color: var(--purple-accent);
+    background: var(--purple-wash);
+    color: var(--ink);
+  }
+  .quick-nav-ep {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .quick-nav-title { font-size: 12px; }
+  @media print { .quick-nav { display: none !important; } }
+  @media (max-width: 640px) {
+    .quick-nav { padding: 20px 16px 0; }
+    .quick-nav-link { padding: 6px 12px; font-size: 11px; }
+    .quick-nav-title { display: none; }
+  }
+
+  /* ── Main ── */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+
+  /* ── Episode Card ── */
+  .episode { margin-top: 64px; }
+
+  .ep-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 32px;
+    background: var(--purple-dark);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ep-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .ep-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 2px;
+  }
+  .ep-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .ep-body {
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    background: #fff;
+  }
+
+  /* ── Read Link ── */
+  .ep-watch-link {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 16px;
+    border: 1px solid rgba(201,168,76,0.45);
+    border-radius: 2px;
+    background: rgba(201,168,76,0.08);
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .ep-watch-link:hover { background: rgba(201,168,76,0.22); }
+
+  /* ── Info Strip ── */
+  .info-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-bottom: 1px solid var(--rule);
+  }
+  .info-item { padding: 18px 24px; border-right: 1px solid var(--rule); }
+  .info-item:last-child { border-right: none; }
+  .info-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple-accent);
+    margin-bottom: 4px;
+  }
+  .info-value { font-size: 13px; color: var(--ink-soft); }
+
+  /* ── Section ── */
+  .section { padding: 28px 32px; border-bottom: 1px solid var(--rule); }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── Points Table ── */
+  .points-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .points-table th {
+    background: var(--purple-dark);
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .points-table td {
+    padding: 13px 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.65;
+  }
+  .points-table tr:nth-child(even) td { background: var(--purple-wash); }
+  .points-table .td-label {
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+    width: 200px;
+  }
+
+  /* ── Body Text ── */
+  .body-text {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+  .body-text:last-child { margin-bottom: 0; }
+
+  /* ── Takeaway ── */
+  .takeaway {
+    background: var(--purple-deep);
+    color: rgba(255,255,255,0.85);
+    border-radius: 0 0 4px 4px;
+    padding: 24px 32px;
+    font-size: 14px;
+    line-height: 1.75;
+    border-bottom: none !important;
+    position: relative;
+  }
+  .takeaway::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 32px; right: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .takeaway .section-label { color: var(--gold); border-bottom-color: rgba(201,168,76,0.25); }
+
+  /* ── Footer ── */
+  .site-footer {
+    text-align: center;
+    padding: 48px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PDF Button ── */
+  .pdf-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--purple-dark);
+    color: #fff;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(26,15,36,0.4);
+    transition: background 0.2s, transform 0.15s;
+  }
+  .pdf-btn:hover { background: var(--purple-mid); transform: translateY(-1px); }
+  .pdf-btn:active { transform: translateY(0); }
+  .pdf-btn-gold { color: var(--gold); font-weight: 500; }
+
+  /* ── Print ── */
+  @media print {
+    @page { size: A4; margin: 12mm 14mm 12mm 14mm; }
+
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    body { background: #fff; font-size: 11pt; }
+
+    .pdf-btn { display: none !important; }
+    .ep-watch-link { display: none !important; }
+    .quick-nav { display: none !important; }
+
+    .site-header {
+      padding: 28px 28px 22px !important;
+      background: #1a0f24 !important;
+    }
+
+    .header-title { font-size: 36pt !important; }
+    .header-subtitle { font-size: 14pt !important; }
+
+    .main { padding: 0 0 20px; max-width: 100%; }
+
+    .episode { margin-top: 20px; }
+
+    .ep-banner { background: #2a1840 !important; break-after: avoid; }
+    body.pdf-blocks .section { break-inside: avoid; page-break-inside: avoid; }
+    body.pdf-blocks .ep-body { break-before: avoid; page-break-before: avoid; }
+
+    .takeaway {
+      background: #1a0f24 !important;
+      color: rgba(255,255,255,0.92) !important;
+    }
+    .takeaway .section-label { color: #c9a84c !important; }
+
+    .points-table tr:nth-child(even) td { background: #f5f0fb !important; }
+    .points-table th { background: #2a1840 !important; color: #fff !important; }
+
+    .site-footer { margin-top: 16px; padding: 20px; }
+  }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 32px 16px 28px; }
+    .header-title { font-size: 32px; }
+    .header-subtitle { font-size: 16px; }
+    .header-meta { gap: 8px; }
+    .main { padding: 0 16px 60px; }
+
+    .episode { margin-top: 32px; }
+    .ep-banner { padding: 16px; gap: 10px; flex-direction: column; align-items: flex-start; }
+    .ep-title { font-size: 20px; }
+    .ep-watch-link { font-size: 10px; padding: 5px 12px; }
+
+    .info-strip { grid-template-columns: 1fr; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 12px 16px; }
+
+    .section { padding: 16px; }
+
+    /* Tables — stacked cards on mobile */
+    .points-table { min-width: 0; }
+    .points-table thead { display: none; }
+    .points-table, .points-table tbody { display: block; }
+    .points-table tr {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .points-table tr:last-child { border-bottom: none; }
+    .points-table td {
+      display: block;
+      padding: 0;
+      border: none;
+      background: none !important;
+      width: auto !important;
+    }
+    .points-table .td-label {
+      white-space: normal;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .site-footer { padding: 28px 16px; }
+
+    .pdf-btn {
+      bottom: 16px; right: 16px;
+      padding: 11px 16px; font-size: 12px; gap: 7px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <p class="header-label">Book &middot; Life With Allah / Ummah Welfare Trust</p>
+    <h1 class="header-title">Taste the Sweetness of Salah</h1>
+    <p class="header-subtitle">Khush&#363; in Prayer &mdash; Chapter Notes</p>
+    <div class="header-meta">
+      <span class="meta-pill">Khush&#363;&lsquo; &amp; Salah</span>
+      <span class="meta-pill">198 Pages &middot; 4 Chapters</span>
+      <span class="meta-pill">Practical Guide</span>
+    </div>
+  </div>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLVZ63V2V4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GLVZ63V2V4');
+</script>
+
+</header>
+
+<nav class="quick-nav">
+  <p class="quick-nav-label">Chapters</p>
+  <ul class="quick-nav-list">
+    <li><a class="quick-nav-link" href="#ch1"><span class="quick-nav-ep">Ch 01</span><span class="quick-nav-title">Khush&#363;&lsquo; &mdash; The Key to Salah</span></a></li>
+    <li><a class="quick-nav-link" href="#ch2"><span class="quick-nav-ep">Ch 02</span><span class="quick-nav-title">10 Steps Before Salah</span></a></li>
+    <li><a class="quick-nav-link" href="#ch3"><span class="quick-nav-ep">Ch 03</span><span class="quick-nav-title">10 Steps During Salah</span></a></li>
+    <li><a class="quick-nav-link" href="#ch4"><span class="quick-nav-ep">Ch 04</span><span class="quick-nav-title">A Journey Through Salah</span></a></li>
+  </ul>
+</nav>
+
+<main class="main">
+
+  <!-- ═══════════════════════════ CHAPTER 1 ═══════════════════════════ -->
+  <article class="episode" id="ch1">
+    <div class="ep-banner">
+      <span class="ep-number">Ch 01</span>
+      <h2 class="ep-title">Khush&#363;&lsquo; &mdash; The Key to Salah</h2>
+      <a class="ep-watch-link" href="https://lifewithallah.com/wp-content/uploads/2021/04/Taste-the-Sweetness-of-Salah-by-Life-With-Allah.pdf" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Read PDF
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Topic</p>
+          <p class="info-value">Khush&#363;&lsquo; (Humility &amp; Concentration in Prayer)</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">What it is, why it matters, and why we lack it</p>
+        </div>
+      </div>
+
+      <!-- What is Khushu -->
+      <div class="section">
+        <p class="section-label">What is Khush&#363;&lsquo;</p>
+        <p class="body-text">Khush&#363;&lsquo; is the heart standing with complete humility, lowliness, and full concentration toward Allah. It is not merely stillness of the body &mdash; it is the stillness and submission of the heart. When your heart truly softens and humbles itself before its Lord, everything else retreats into insignificance, and your limbs follow. The Prophet &#65018; said: &ldquo;There is a lump of flesh in the body: if it is sound, the whole body will be sound, but if it is corrupt, the whole body will be corrupt. Truly, it is the heart&rdquo; (Bukh&#257;r&#299;).</p>
+        <p class="body-text">Ibn al-Qayyim compared khush&#363;&lsquo; in salah to the soul in the body. When the soul leaves, the body dies. Similarly, without khush&#363;&lsquo;, the salah lacks its spirit and essence. The outer form of salah is ruk&#363;&lsquo; and suj&#363;d &mdash; its inner reality is khush&#363;&lsquo;.</p>
+      </div>
+
+      <!-- Why Khushu Matters -->
+      <div class="section">
+        <p class="section-label">Why Khush&#363;&lsquo; Matters</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Point</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">First thing lifted from this ummah</td>
+              <td>The Prophet &#65018; said khush&#363;&lsquo; will be the first thing removed from this nation &mdash; &ldquo;until you will not find anyone with khush&#363;&lsquo;&rdquo; (Tabar&#257;n&#299;).</td>
+            </tr>
+            <tr>
+              <td class="td-label">It is the soul of salah</td>
+              <td>Salah without khush&#363;&lsquo; is like a body without a soul &mdash; technically present but lifeless. The obligation may be legally fulfilled, but the essence is missing.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Allah wants your heart</td>
+              <td>Physical movements alone are not the goal. Two men may stand in the same row, yet the difference between their prayers is like the distance between the heavens and the earth (Ibn Taymiyyah).</td>
+            </tr>
+            <tr>
+              <td class="td-label">Guaranteed success</td>
+              <td>Allah says: &ldquo;Successful indeed are the believers who are humble in their salah&rdquo; (23:1-2). Khush&#363;&lsquo; is the first quality mentioned.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Sins are erased</td>
+              <td>&ldquo;Whoever performs wud&#363;&rsquo; and then performs two rak&lsquo;ah of prayer during which he does not let his thoughts wander, Allah will forgive all of his previous sins&rdquo; (Bukh&#257;r&#299;).</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Five Categories -->
+      <div class="section">
+        <p class="section-label">Five Categories of People in Salah</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Category</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">1. Punished</td>
+              <td>Prays without proper wud&#363;&rsquo;, timing, or form &mdash; sins are added, not removed.</td>
+            </tr>
+            <tr>
+              <td class="td-label">2. Held to account</td>
+              <td>The body is present but the heart wanders the entire time &mdash; taken to account for negligence.</td>
+            </tr>
+            <tr>
+              <td class="td-label">3. Pardoned</td>
+              <td>Struggles with distraction but keeps fighting back &mdash; forgiven for the lapses.</td>
+            </tr>
+            <tr>
+              <td class="td-label">4. Rewarded</td>
+              <td>Maintains focus and presence throughout &mdash; receives the full reward of salah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">5. Drawn close to Allah</td>
+              <td>The heart is fully immersed, as if standing before Allah directly &mdash; reaches the highest station.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Why We Lack Khushu -->
+      <div class="section">
+        <p class="section-label">Why We Lack Khush&#363;&lsquo;</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Cause</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Sins</td>
+              <td>Every sin dims the heart&rsquo;s light and makes it harder to connect in salah. The more we sin, the thicker the veil becomes.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Attachment to dunya</td>
+              <td>A heart full of worldly concerns has no room for spiritual focus. Whatever occupies the heart outside salah follows you into it.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Weak iman</td>
+              <td>Khush&#363;&lsquo; is proportional to faith &mdash; weak faith produces weak presence. Strengthening iman directly strengthens khush&#363;&lsquo;.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Not understanding what you say</td>
+              <td>Reciting Arabic without knowing its meaning keeps the heart uninvolved. The tongue moves out of habit while the mind drifts.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>Khush&#363;&lsquo; is not a feeling you wait for &mdash; it is a skill you build. The Prophet&rsquo;s &#65018; salah was the joy of his life because his heart was fully present. He would say to Bil&#257;l: &ldquo;Stand, O Bil&#257;l, and bring us comfort through salah.&rdquo; Start by understanding what you are saying, and fight for every second of presence.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ CHAPTER 2 ═══════════════════════════ -->
+  <article class="episode" id="ch2">
+    <div class="ep-banner">
+      <span class="ep-number">Ch 02</span>
+      <h2 class="ep-title">10 Steps Before Salah</h2>
+      <a class="ep-watch-link" href="https://lifewithallah.com/wp-content/uploads/2021/04/Taste-the-Sweetness-of-Salah-by-Life-With-Allah.pdf" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Read PDF
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Topic</p>
+          <p class="info-value">Pre-Salah Preparation</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">10 practical steps to prepare your heart before standing in prayer</p>
+        </div>
+      </div>
+
+      <!-- The 10 Steps -->
+      <div class="section">
+        <p class="section-label">The 10 Steps</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Step</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">1. Appreciate the importance of salah</td>
+              <td>Salah is the first deed you will be asked about on the Day of Judgement, the last advice of the Prophet &#65018;, and the dividing line between a Muslim and a disbeliever. Internalise its weight.</td>
+            </tr>
+            <tr>
+              <td class="td-label">2. Attain ma&lsquo;rifah of Allah</td>
+              <td>The more you know about who you are standing before, the more your heart submits. Study His names, attributes, and actions &mdash; know Him deeply.</td>
+            </tr>
+            <tr>
+              <td class="td-label">3. Stop sinning</td>
+              <td>Sins are the biggest barrier to khush&#363;&lsquo;. Guard what you look at, what you say, and what you allow into your heart. Every sin builds a wall between you and presence in salah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">4. Soften your heart</td>
+              <td>Read Qur&rsquo;an, remember death, visit graves, sit with the righteous &mdash; do whatever strips away the hardness. A hard heart cannot experience khush&#363;&lsquo;.</td>
+            </tr>
+            <tr>
+              <td class="td-label">5. Increase private worship</td>
+              <td>The more you worship in secret, the more sincere your public worship becomes. Night prayer (qiy&#257;m al-layl) is the most powerful softener of the heart.</td>
+            </tr>
+            <tr>
+              <td class="td-label">6. Ask Allah for khush&#363;&lsquo;</td>
+              <td>The Prophet &#65018; himself sought refuge from a heart that does not have khush&#363;&lsquo;. Make du&lsquo;&#257;&rsquo; for it persistently &mdash; do not give up.</td>
+            </tr>
+            <tr>
+              <td class="td-label">7. Respond to the adh&#257;n</td>
+              <td>Walk calmly to the masjid, make du&lsquo;&#257;&rsquo; upon entering, repeat after the mu&rsquo;adhdhin &mdash; these rituals mentally prepare you for salah before it even begins.</td>
+            </tr>
+            <tr>
+              <td class="td-label">8. Pray in congregation</td>
+              <td>Delaying salah weakens your connection. Praying with others strengthens focus and accountability &mdash; do not procrastinate.</td>
+            </tr>
+            <tr>
+              <td class="td-label">9. Be punctual with sunnah prayers</td>
+              <td>The voluntary prayers before and after are warm-ups that ease you into the right spiritual state for the fard.</td>
+            </tr>
+            <tr>
+              <td class="td-label">10. Eliminate distractions</td>
+              <td>Remove anything that will pull your mind away &mdash; phone, noise, visual clutter, hunger, need for the bathroom. Prepare your body so your heart can be free.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>Khush&#363;&lsquo; does not begin when you say All&#257;hu Akbar &mdash; it begins hours before, in how you live. Purify your heart from sins, build your knowledge of Allah, and prepare your body and environment. The quality of your salah is a mirror of the quality of your day.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ CHAPTER 3 ═══════════════════════════ -->
+  <article class="episode" id="ch3">
+    <div class="ep-banner">
+      <span class="ep-number">Ch 03</span>
+      <h2 class="ep-title">10 Steps During Salah</h2>
+      <a class="ep-watch-link" href="https://lifewithallah.com/wp-content/uploads/2021/04/Taste-the-Sweetness-of-Salah-by-Life-With-Allah.pdf" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Read PDF
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Topic</p>
+          <p class="info-value">Focus During Salah</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">10 practical steps to maintain khush&#363;&lsquo; once the prayer has started</p>
+        </div>
+      </div>
+
+      <!-- The 10 Steps -->
+      <div class="section">
+        <p class="section-label">The 10 Steps</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Step</th><th>Detail</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">1. Fight Shayt&#257;n&rsquo;s whispers</td>
+              <td>He will try to distract you &mdash; acknowledge the whisper, seek refuge in Allah (blow lightly to the left three times), and pull your focus back. This battle is itself worship.</td>
+            </tr>
+            <tr>
+              <td class="td-label">2. Understand the meaning</td>
+              <td>Learn the translation of al-F&#257;tihah, your adhk&#257;r, and your s&#363;rahs. A mind that understands is a heart that engages &mdash; you cannot reflect on what you do not comprehend.</td>
+            </tr>
+            <tr>
+              <td class="td-label">3. Vary the adhk&#257;r and s&#363;rahs</td>
+              <td>Reciting the same thing every time makes the mind autopilot. Rotate your s&#363;rahs and du&lsquo;&#257;&rsquo; to keep your heart alert and engaged.</td>
+            </tr>
+            <tr>
+              <td class="td-label">4. Reflect and interact with the Qur&rsquo;&#257;n</td>
+              <td>When you recite an &#257;yah about mercy, ask for it. When you hear about punishment, seek refuge. Let the Qur&rsquo;&#257;n be a conversation, not a monologue.</td>
+            </tr>
+            <tr>
+              <td class="td-label">5. Recite slowly and beautifully</td>
+              <td>Tart&#299;l (slow, measured recitation) gives the heart time to absorb. Rushing kills reflection &mdash; the Qur&rsquo;&#257;n was revealed to be pondered, not raced through.</td>
+            </tr>
+            <tr>
+              <td class="td-label">6. Be calm and lengthen your salah</td>
+              <td>The Prophet &#65018; would stay long in ruk&#363;&lsquo; and suj&#363;d. Lengthening the prayer gives the heart space to settle and truly connect.</td>
+            </tr>
+            <tr>
+              <td class="td-label">7. Remember death</td>
+              <td>Pray as if this is your last salah. The Prophet &#65018; said: &ldquo;Remember death in your salah, because when a person remembers death in his salah, he is more likely to perfect it.&rdquo;</td>
+            </tr>
+            <tr>
+              <td class="td-label">8. Know that Allah is responding</td>
+              <td>In al-F&#257;tihah, Allah responds to every line you say. You are in a direct, live conversation with the Creator &mdash; not reciting into the void.</td>
+            </tr>
+            <tr>
+              <td class="td-label">9. Bring love, hope, and fear</td>
+              <td>Combine love for Allah, hope in His mercy, and fear of His punishment. These three emotions fuel the heart&rsquo;s engagement and keep it anchored.</td>
+            </tr>
+            <tr>
+              <td class="td-label">10. Focus your heart fully on Him</td>
+              <td>This is the summary of all other steps &mdash; direct every ounce of your attention to the One you are standing before. This is the secret of salah.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>During salah, your greatest battle is with your own mind. Every technique here comes down to one principle: be present. Talk to Allah, listen to what you are saying, and fight to stay. Even if you lose focus a hundred times, the act of returning is itself worship.</p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ═══════════════════════════ CHAPTER 4 ═══════════════════════════ -->
+  <article class="episode" id="ch4">
+    <div class="ep-banner">
+      <span class="ep-number">Ch 04</span>
+      <h2 class="ep-title">A Journey Through Salah</h2>
+      <a class="ep-watch-link" href="https://lifewithallah.com/wp-content/uploads/2021/04/Taste-the-Sweetness-of-Salah-by-Life-With-Allah.pdf" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Read PDF
+      </a>
+    </div>
+    <div class="ep-body">
+
+      <div class="info-strip">
+        <div class="info-item">
+          <p class="info-label">Topic</p>
+          <p class="info-value">A Spiritual Journey Through Salah</p>
+        </div>
+        <div class="info-item">
+          <p class="info-label">Theme</p>
+          <p class="info-value">The meaning behind every posture, phrase, and movement from wud&#363;&rsquo; to sal&#257;m</p>
+        </div>
+      </div>
+
+      <!-- Preparation -->
+      <div class="section">
+        <p class="section-label">Preparation &mdash; Wud&#363;&rsquo; &amp; Facing the Qiblah</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Moment</th><th>Spiritual Meaning</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Wud&#363;&rsquo;</td>
+              <td>You are not just washing your body &mdash; you are washing your sins. Each limb that is washed has its sins fall away with the water. The Prophet &#65018; said the sins exit with the last drops.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Facing the qiblah</td>
+              <td>You are turning your body toward the Ka&lsquo;bah and your heart toward Allah. The external alignment mirrors the internal &mdash; face Him with your body and your soul.</td>
+            </tr>
+            <tr>
+              <td class="td-label">The intention (niyyah)</td>
+              <td>The heart resolves to stand before its Lord. This is not spoken aloud &mdash; it is the sincere direction of the heart toward its Creator.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- The Opening -->
+      <div class="section">
+        <p class="section-label">The Opening &mdash; Takb&#299;r to Isti&lsquo;&#257;dhah</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Moment</th><th>Spiritual Meaning</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Raising the hands</td>
+              <td>You are throwing the dunya behind you. Everything worldly is now behind your raised palms &mdash; you have entered the court of the Almighty.</td>
+            </tr>
+            <tr>
+              <td class="td-label">All&#257;hu Akbar</td>
+              <td>Allah is greater than anything occupying your mind. Greater than your worries, your plans, your distractions &mdash; nothing compares to Him.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Placing hands on the chest</td>
+              <td>A posture of humility, like a servant standing before a king. The eyes lower to the place of suj&#363;d &mdash; full attention, full submission.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Du&lsquo;&#257;&rsquo; al-istift&#257;h</td>
+              <td>The opening supplication &mdash; you ask Allah to cleanse you, to distance you from your sins as the east is distant from the west, and to purify your heart.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Isti&lsquo;&#257;dhah</td>
+              <td>Before you open Allah&rsquo;s Book, you seek protection from Shayt&#257;n &mdash; the one who will try hardest to distract you now that you are standing before Allah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Basmalah</td>
+              <td>You begin in the name of Allah, acknowledging that nothing &mdash; not even this recitation &mdash; happens without Him.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Surah al-Fatihah -->
+      <div class="section">
+        <p class="section-label">S&#363;rah al-F&#257;tihah &mdash; A Conversation with Allah</p>
+        <p class="body-text" style="margin-bottom:16px;">In a hadith qudsi (Muslim), Allah describes what happens when you recite al-F&#257;tihah: He responds to you, line by line. This is not a monologue &mdash; it is a direct conversation.</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:30%;">Verse</th><th style="width:35%;">Meaning</th><th style="width:35%;">Allah&rsquo;s Response</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Al-hamdu lill&#257;hi Rabb al-&lsquo;&#257;lam&#299;n</td>
+              <td>All praise belongs to Allah, Lord of all creation</td>
+              <td>&ldquo;My servant has praised Me&rdquo;</td>
+            </tr>
+            <tr>
+              <td class="td-label">Ar-Rahm&#257;n ar-Rah&#299;m</td>
+              <td>The Entirely Merciful, the Especially Merciful</td>
+              <td>&ldquo;My servant has glorified Me&rdquo;</td>
+            </tr>
+            <tr>
+              <td class="td-label">M&#257;liki yawm ad-d&#299;n</td>
+              <td>Master of the Day of Judgement</td>
+              <td>&ldquo;My servant has entrusted his affairs to Me&rdquo;</td>
+            </tr>
+            <tr>
+              <td class="td-label">Iyy&#257;ka na&lsquo;budu wa iyy&#257;ka nasta&lsquo;&#299;n</td>
+              <td>You alone we worship, and You alone we ask for help</td>
+              <td>&ldquo;This is between Me and My servant, and My servant shall have what he asks for&rdquo;</td>
+            </tr>
+            <tr>
+              <td class="td-label">Ihdin&#257; as-sir&#257;t al-mustaq&#299;m...</td>
+              <td>Guide us to the straight path &mdash; the path of those You have blessed, not those who earned Your anger nor those who went astray</td>
+              <td>&ldquo;This is for My servant, and My servant shall have what he asks for&rdquo;</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Recitation and Ruku -->
+      <div class="section">
+        <p class="section-label">Recitation &amp; Ruk&#363;&lsquo;</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Moment</th><th>Spiritual Meaning</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Reciting Qur&rsquo;&#257;n after al-F&#257;tihah</td>
+              <td>You are listening to Allah&rsquo;s direct words. Let each &#257;yah move you &mdash; seek mercy when mercy is mentioned, seek refuge when punishment is mentioned. Interact, don&rsquo;t just recite.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Ruk&#363;&lsquo; (bowing)</td>
+              <td>Your spine bows, your head lowers &mdash; you are declaring with your body that Allah is supreme. &ldquo;Sub&#7717;&#257;na Rabbiyal-&lsquo;A&#7827;&#299;m&rdquo; &mdash; How perfect is my Lord, the Greatest.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Standing from ruk&#363;&lsquo;</td>
+              <td>&ldquo;Sami&lsquo;All&#257;hu liman hamidah&rdquo; &mdash; Allah hears the one who praises Him. Then: &ldquo;Rabban&#257; wa lakal-hamd&rdquo; &mdash; Our Lord, and all praise is Yours. He heard you.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- Sujud -->
+      <div class="section">
+        <p class="section-label">Suj&#363;d &mdash; The Closest You Will Ever Be to Allah</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Moment</th><th>Spiritual Meaning</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Going down for suj&#363;d</td>
+              <td>The highest part of your body &mdash; your face &mdash; meets the lowest surface &mdash; the ground. This is the ultimate act of humility before the Most High.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Sub&#7717;&#257;na Rabbiyal-A&lsquo;l&#257;</td>
+              <td>How perfect is my Lord, the Most High. You declare His elevation while you are at your lowest point &mdash; the contrast is the entire point.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Making du&lsquo;&#257;&rsquo; in suj&#363;d</td>
+              <td>The Prophet &#65018; said: &ldquo;The closest a servant is to his Lord is when he is in suj&#363;d, so increase your du&lsquo;&#257;&rsquo;&rdquo; (Muslim). Pour your heart out &mdash; this is the moment.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Between the two sajdahs</td>
+              <td>&ldquo;Rabbighfir l&#299;&rdquo; &mdash; My Lord, forgive me. A pause to beg for forgiveness before returning to the ground.</td>
+            </tr>
+            <tr>
+              <td class="td-label">The second suj&#363;d</td>
+              <td>You go back down, reinforcing the humility. Repetition deepens the state and gives the heart another chance to connect.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- The Closing -->
+      <div class="section">
+        <p class="section-label">The Closing &mdash; Tashahhud to Sal&#257;m</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table class="points-table">
+          <thead><tr><th style="width:200px;">Moment</th><th>Spiritual Meaning</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="td-label">Tashahhud</td>
+              <td>You send greetings to Allah, then to the Prophet &#65018;, then to every righteous servant of Allah across all of time &mdash; you are connected to the entire ummah.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Salaw&#257;t upon the Prophet &#65018;</td>
+              <td>You ask Allah to honour and bless the Prophet &mdash; connecting your prayer to the one who taught you how to pray in the first place.</td>
+            </tr>
+            <tr>
+              <td class="td-label">Du&lsquo;&#257;&rsquo; before sal&#257;m</td>
+              <td>The Prophet &#65018; taught specific supplications for this moment &mdash; seek refuge from the punishment of the grave, from the trial of the Dajj&#257;l, and from the fitnah of life and death.</td>
+            </tr>
+            <tr>
+              <td class="td-label">As-sal&#257;mu &lsquo;alaykum wa rahmatull&#257;h</td>
+              <td>You turn right and left, sending peace to the angels and to every believer beside you. The prayer ends as it began &mdash; with connection to Allah and His creation.</td>
+            </tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- After Salah -->
+      <div class="section">
+        <p class="section-label">After Salah</p>
+        <p class="body-text">The adhk&#257;r after salah seal the prayer. Begin with istighf&#257;r (seeking forgiveness) three times, then proceed with the adhk&#257;r the Prophet &#65018; would say &mdash; including &ldquo;All&#257;humma antas-sal&#257;m wa minkas-sal&#257;m&rdquo; (O Allah, You are Peace, and from You is peace). The prayer does not truly end when you turn your head for sal&#257;m &mdash; it ends when you carry its spirit forward into your day.</p>
+      </div>
+
+      <!-- Takeaway -->
+      <div class="section takeaway">
+        <p class="section-label">Takeaway</p>
+        <p>Every moment of salah carries meaning. The more you understand what you are doing and saying, the more your heart engages. Salah was never meant to be a ritual you rush through &mdash; it is a private audience with Allah. From the first drop of wud&#363;&rsquo; water to the final sal&#257;m, you are on a journey to Him. Approach it like one.</p>
+      </div>
+
+    </div>
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  Life With Allah &middot; Taste the Sweetness of Salah &middot; Ummah Welfare Trust
+</footer>
+
+<style>
+  .pdf-options {
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    min-width: 220px;
+  }
+  .pdf-options.active { display: block; }
+  .pdf-option {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .pdf-option + .pdf-option { margin-top: 6px; }
+  .pdf-option:hover { background: #f5f5f5; }
+  .pdf-option-title { font-weight: 500; display: block; }
+  .pdf-option-desc { font-size: 11px; color: #6b6b6b; margin-top: 2px; display: block; }
+  @media print { .pdf-options { display: none !important; } }
+</style>
+
+<div class="pdf-options" id="pdfOptions">
+  <button class="pdf-option" onclick="exportPDF('flow')">
+    <span class="pdf-option-title">Continuous Flow</span>
+    <span class="pdf-option-desc">Content breaks naturally across pages</span>
+  </button>
+  <button class="pdf-option" onclick="exportPDF('blocks')">
+    <span class="pdf-option-title">Keep Sections Together</span>
+    <span class="pdf-option-desc">Sections stay intact &mdash; may leave white space</span>
+  </button>
+</div>
+
+<button class="pdf-btn" onclick="togglePdfOptions()" title="Save as PDF">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="12" y1="18" x2="12" y2="12"/>
+    <polyline points="9 15 12 18 15 15"/>
+  </svg>
+  <span class="pdf-btn-gold">Export</span>&nbsp;PDF
+</button>
+
+<script>
+  function togglePdfOptions() {
+    document.getElementById('pdfOptions').classList.toggle('active');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.pdf-btn') && !e.target.closest('.pdf-options')) {
+      document.getElementById('pdfOptions').classList.remove('active');
+    }
+  });
+
+  function exportPDF(mode) {
+    document.getElementById('pdfOptions').classList.remove('active');
+    if (mode === 'blocks') document.body.classList.add('pdf-blocks');
+    window.print();
+    document.body.classList.remove('pdf-blocks');
+  }
+</script>
+
+</body>
+</html>

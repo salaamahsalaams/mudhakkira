@@ -373,6 +373,7 @@
 
     *, *::before, *::after {
       animation: none !important;
+      -webkit-animation: none !important;
       transition: none !important;
       opacity: 1 !important;
       transform: none !important;
@@ -415,6 +416,15 @@
     }
 
     .freq-block { background: #fdf8ec !important; }
+
+    [style*="overflow"] { overflow: visible !important; }
+    .points-table, .vocab-table,
+    .points-table tbody, .vocab-table tbody { display: table !important; }
+    .points-table tbody, .vocab-table tbody { display: table-row-group !important; }
+    .points-table thead, .vocab-table thead { display: table-header-group !important; }
+    .points-table tr, .vocab-table tr { display: table-row !important; }
+    .points-table td, .points-table th,
+    .vocab-table td, .vocab-table th { display: table-cell !important; }
 
     .site-footer { margin-top: 16px; padding: 20px; }
   }
@@ -833,7 +843,10 @@
   function exportPDF(mode) {
     document.getElementById('pdfOptions').classList.remove('active');
     if (mode === 'blocks') document.body.classList.add('pdf-blocks');
+    var oDivs = document.querySelectorAll('[style*="overflow"]');
+    oDivs.forEach(function(d) { d.dataset.ov = d.style.overflow; d.style.overflow = 'visible'; });
     window.print();
+    oDivs.forEach(function(d) { d.style.overflow = d.dataset.ov || ''; });
     document.body.classList.remove('pdf-blocks');
   }
 </script>

@@ -354,6 +354,7 @@
 
     *, *::before, *::after {
       animation: none !important;
+      -webkit-animation: none !important;
       transition: none !important;
       opacity: 1 !important;
       transform: none !important;
@@ -389,6 +390,13 @@
 
     .points-table tr:nth-child(even) td { background: #f5f0fb !important; }
     .points-table th { background: #2a1840 !important; color: #fff !important; }
+
+    [style*="overflow"] { overflow: visible !important; }
+    .points-table, .points-table tbody { display: table !important; }
+    .points-table tbody { display: table-row-group !important; }
+    .points-table thead { display: table-header-group !important; }
+    .points-table tr { display: table-row !important; }
+    .points-table td, .points-table th { display: table-cell !important; }
 
     .site-footer { margin-top: 16px; padding: 20px; }
   }
@@ -1048,7 +1056,10 @@
   function exportPDF(mode) {
     document.getElementById('pdfOptions').classList.remove('active');
     if (mode === 'blocks') document.body.classList.add('pdf-blocks');
+    var oDivs = document.querySelectorAll('[style*="overflow"]');
+    oDivs.forEach(function(d) { d.dataset.ov = d.style.overflow; d.style.overflow = 'visible'; });
     window.print();
+    oDivs.forEach(function(d) { d.style.overflow = d.dataset.ov || ''; });
     document.body.classList.remove('pdf-blocks');
   }
 </script>

@@ -253,6 +253,24 @@
   }
   .restart-btn:hover { background: var(--mid); }
 
+  /* ── Mode Options (quiz / match count toggle) ── */
+  .mode-options {
+    display: flex; gap: 6px; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .mode-opt {
+    padding: 6px 16px; border-radius: 20px;
+    border: 1px solid var(--rule); background: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
+    color: var(--ink-muted); cursor: pointer; transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+  .mode-opt:hover { border-color: var(--accent); color: var(--accent); }
+  .mode-opt.active {
+    background: var(--dark); color: #fff;
+    border-color: var(--dark);
+  }
+
   /* ── Footer ── */
   .site-footer {
     text-align: center; padding: 40px 24px;
@@ -326,12 +344,20 @@
 
   <!-- ── Quiz ── -->
   <div class="mode" id="quiz">
+    <div class="mode-options" id="quiz-options">
+      <button class="mode-opt active" onclick="startQuiz(25)">25 Questions</button>
+      <button class="mode-opt" onclick="startQuiz(0)">All Names</button>
+    </div>
     <p class="quiz-score" id="quiz-score"></p>
     <div id="quiz-area"></div>
   </div>
 
   <!-- ── Match ── -->
   <div class="mode" id="match">
+    <div class="mode-options" id="match-options">
+      <button class="mode-opt active" onclick="startMatch(25)">25 Names</button>
+      <button class="mode-opt" onclick="startMatch(0)">All Names</button>
+    </div>
     <div class="match-bar">
       <span id="match-progress"></span>
       <span class="match-timer" id="match-timer">0:00</span>
@@ -389,7 +415,11 @@ const NAMES = [
   { ar:"\u0627\u0644\u0645\u064F\u0624\u0652\u0645\u0650\u0646\u064F", translit:"Al-Mu\u2019min", meaning:"The Grantor of Security", ep:12 },
   { ar:"\u0627\u0644\u0645\u064F\u0647\u064E\u064A\u0652\u0645\u0650\u0646\u064F", translit:"Al-Muhaymin", meaning:"The Overseeing Protector", ep:12 },
   { ar:"\u0627\u0644\u062D\u064E\u0641\u0650\u064A\u0638\u064F", translit:"Al-\u1E24af\u012B\u1E93", meaning:"The Preserver", ep:12 },
-  { ar:"\u0627\u0644\u0648\u064E\u0643\u0650\u064A\u0644\u064F", translit:"Al-Wak\u012Bl", meaning:"The Ultimate Trustee", ep:12 }
+  { ar:"\u0627\u0644\u0648\u064E\u0643\u0650\u064A\u0644\u064F", translit:"Al-Wak\u012Bl", meaning:"The Ultimate Trustee", ep:12 },
+  { ar:"\u0627\u0644\u0628\u064E\u0635\u0650\u064A\u0631\u064F", translit:"Al-Ba\u1E63\u012Br", meaning:"The All-Seeing", ep:13 },
+  { ar:"\u0627\u0644\u0634\u064E\u0651\u0647\u0650\u064A\u062F\u064F", translit:"Ash-Shah\u012Bd", meaning:"The Ever-Present Witness", ep:13 },
+  { ar:"\u0627\u0644\u0631\u064E\u0651\u0642\u0650\u064A\u0628\u064F", translit:"Ar-Raq\u012Bb", meaning:"The Ever-Watchful", ep:13 },
+  { ar:"\u0627\u0644\u0633\u0650\u0651\u062A\u0650\u0651\u064A\u0631\u064F", translit:"As-Sitt\u012Br", meaning:"The Concealer", ep:13 }
 ];
 
 /* ── Utility ── */
@@ -402,8 +432,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.mode').forEach(m => m.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.mode).classList.add('active');
-    if(btn.dataset.mode === 'quiz' && !quizStarted) startQuiz();
-    if(btn.dataset.mode === 'match' && !matchStarted) startMatch();
+    if(btn.dataset.mode === 'quiz' && !quizStarted) startQuiz(QUIZ_DEFAULT);
+    if(btn.dataset.mode === 'match' && !matchStarted) startMatch(MATCH_DEFAULT);
   });
 });
 
@@ -438,11 +468,19 @@ fcRender();
 /* ═══════════════════ QUIZ ═══════════════════ */
 let quizStarted = false;
 let quizOrder, quizIdx, quizCorrect, quizTotal;
+const QUIZ_DEFAULT = 25;
 
-function startQuiz() {
+function startQuiz(count) {
   quizStarted = true;
-  quizOrder = shuffle([...Array(NAMES.length).keys()]);
-  quizIdx = 0; quizCorrect = 0; quizTotal = NAMES.length;
+  var all = shuffle([...Array(NAMES.length).keys()]);
+  var n = (!count || count >= NAMES.length) ? NAMES.length : count;
+  quizOrder = all.slice(0, n);
+  quizIdx = 0; quizCorrect = 0; quizTotal = n;
+  // update active pill
+  var pills = document.querySelectorAll('#quiz-options .mode-opt');
+  pills.forEach(function(p){ p.classList.remove('active'); });
+  if(n >= NAMES.length) pills[1].classList.add('active');
+  else pills[0].classList.add('active');
   renderQuizQ();
 }
 
@@ -497,19 +535,23 @@ function showQuizResults() {
     '<div class="score-big">' + quizCorrect + '/' + quizTotal + '</div>' +
     '<h3>' + msg + '</h3>' +
     '<p>You got ' + pct + '% correct</p>' +
-    '<button class="restart-btn" onclick="startQuiz()">Try Again</button>' +
+    '<button class="restart-btn" onclick="startQuiz(quizTotal)">Try Again</button>' +
     '</div>';
 }
 
 /* ═══════════════════ MATCH ═══════════════════ */
 let matchStarted = false;
-let matchNames, matchRoundIdx, matchMatched, matchStreak, matchTimer, matchSeconds;
+let matchNames, matchTotal, matchRoundIdx, matchMatched, matchStreak, matchTimer, matchSeconds;
 let selectedLeft = null;
 const MATCH_SIZE = 5;
+const MATCH_DEFAULT = 25;
 
-function startMatch() {
+function startMatch(count) {
   matchStarted = true;
-  matchNames = shuffle([...Array(NAMES.length).keys()]);
+  var all = shuffle([...Array(NAMES.length).keys()]);
+  var n = (!count || count >= NAMES.length) ? NAMES.length : count;
+  matchNames = all.slice(0, n);
+  matchTotal = n;
   matchRoundIdx = 0; matchMatched = 0; matchStreak = 0;
   matchSeconds = 0;
   clearInterval(matchTimer);
@@ -519,6 +561,11 @@ function startMatch() {
     const s = String(matchSeconds%60).padStart(2,'0');
     document.getElementById('match-timer').textContent = m + ':' + s;
   }, 1000);
+  // update active pill
+  var pills = document.querySelectorAll('#match-options .mode-opt');
+  pills.forEach(function(p){ p.classList.remove('active'); });
+  if(n >= NAMES.length) pills[1].classList.add('active');
+  else pills[0].classList.add('active');
   renderMatchRound();
 }
 
@@ -531,7 +578,7 @@ function renderMatchRound() {
   const rightOrder = shuffle([...slice]);
   selectedLeft = null;
 
-  document.getElementById('match-progress').textContent = 'Matched: ' + matchMatched + '/' + NAMES.length;
+  document.getElementById('match-progress').textContent = 'Matched: ' + matchMatched + '/' + matchTotal;
   document.getElementById('match-streak').textContent = 'Streak: ' + matchStreak;
 
   let html = '<div class="match-board">';
@@ -566,7 +613,7 @@ function matchSelect(el) {
       });
       matchMatched++; matchStreak++;
       selectedLeft = null;
-      document.getElementById('match-progress').textContent = 'Matched: ' + matchMatched + '/' + NAMES.length;
+      document.getElementById('match-progress').textContent = 'Matched: ' + matchMatched + '/' + matchTotal;
       document.getElementById('match-streak').textContent = 'Streak: ' + matchStreak;
 
       // check if round complete
@@ -600,8 +647,8 @@ function showMatchResults() {
   document.getElementById('match-area').innerHTML =
     '<div class="match-results">' +
     '<h3>All matched!</h3>' +
-    '<p>You matched all ' + NAMES.length + ' names in ' + m + ':' + s + '</p>' +
-    '<button class="restart-btn" onclick="startMatch()">Play Again</button>' +
+    '<p>You matched all ' + matchTotal + ' names in ' + m + ':' + s + '</p>' +
+    '<button class="restart-btn" onclick="startMatch(matchTotal)">Play Again</button>' +
     '</div>';
 }
 </script>
